@@ -1,0 +1,278 @@
+{
+  "apps": [
+    {
+      "name": "crp-legal-api-dev",
+      "env": {
+        "NODE_ENV": "dev",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/index.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/dev/crp-legal-api.log"
+    },
+    {
+      "name": "crp-legal-send-broad-service-dev",
+      "env": {
+        "NODE_ENV": "dev",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/send-broadcast-service.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/dev/crp-legal-send-broad-service.log"
+    },
+    {
+      "name": "crp-legal-exec-gokuai-api-service-dev",
+      "env": {
+        "NODE_ENV": "dev",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/exec-gokuai-api-service.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/dev/crp-legal-exec-gokuai-api-service.log"
+    },
+    {
+      "name": "crp-legal-send-broadcast-near-case-time-service-dev",
+      "env": {
+        "NODE_ENV": "dev",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/send-broadcast-near-case-time-service.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/dev/crp-legal-send-broadcast-near-case-time-service.log"
+    },
+    {
+      "name": "crp-legal-api-sit",
+      "env": {
+        "NODE_ENV": "sit",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/index.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/sit/crp-legal-api.log"
+    },
+    {
+      "name": "crp-legal-send-broad-service-sit",
+      "env": {
+        "NODE_ENV": "sit",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/send-broadcast-service.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/sit/crp-legal-send-broad-service.log"
+    },
+    {
+      "name": "crp-legal-exec-gokuai-api-service-sit",
+      "env": {
+        "NODE_ENV": "sit",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/exec-gokuai-api-service.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/sit/crp-legal-exec-gokuai-api-service.log"
+    },
+    {
+      "name": "crp-legal-send-broadcast-near-case-time-service-sit",
+      "env": {
+        "NODE_ENV": "sit",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/send-broadcast-near-case-time-service.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/sit/crp-legal-send-broadcast-near-case-time-service.log"
+    },
+    {
+      "name": "crp-legal-api-uat",
+      "env": {
+        "NODE_ENV": "uat",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/index.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/uat/crp-legal-api.log"
+    },
+    {
+      "name": "crp-legal-api-uat-cluster",
+      "env": {
+        "NODE_ENV": "uat",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/index.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/uat/crp-legal-api-cluster.log",
+      "instances": 4,
+      "exec_mode": "cluster"
+    },
+    {
+      "name": "crp-legal-send-broad-service-uat",
+      "env": {
+        "NODE_ENV": "uat",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/send-broadcast-service.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/uat/crp-legal-send-broad-service.log"
+    },
+    {
+      "name": "crp-legal-exec-gokuai-api-service-uat",
+      "env": {
+        "NODE_ENV": "uat",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/exec-gokuai-api-service.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/uat/crp-legal-exec-gokuai-api-service.log"
+    },
+    {
+      "name": "crp-legal-send-broadcast-near-case-time-service-uat",
+      "env": {
+        "NODE_ENV": "uat",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/send-broadcast-near-case-time-service.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/uat/crp-legal-send-broadcast-near-case-time-service.log"
+    },
+    {
+      "name": "crp-legal-api",
+      "env": {
+        "NODE_ENV": "production",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/index.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/prod/crp-legal-api.log"
+    },
+    {
+      "name": "crp-legal-api-cluster",
+      "env": {
+        "NODE_ENV": "production",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/index.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/prod/crp-legal-api-cluster.log",
+      "instances": 4,
+      "exec_mode": "cluster"
+    },
+    {
+      "name": "crp-legal-send-broad-service",
+      "env": {
+        "NODE_ENV": "production",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/send-broadcast-service.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/prod/crp-legal-send-broad-service.log"
+    },
+    {
+      "name": "crp-legal-exec-gokuai-api-service",
+      "env": {
+        "NODE_ENV": "production",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/exec-gokuai-api-service.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/prod/crp-legal-exec-gokuai-api-service.log"
+    },
+    {
+      "name": "crp-legal-send-broadcast-near-case-time-service",
+      "env": {
+        "NODE_ENV": "production",
+        "DEBUG": "tip"
+      },
+      "script": "./bin/send-broadcast-near-case-time-service.js",
+      "watch": [
+        "src"
+      ],
+      "ignore_watch": [
+        "node_modules"
+      ],
+      "log_file": "./logs/prod/crp-legal-send-broadcast-near-case-time-service.log"
+    }
+  ]
+}
