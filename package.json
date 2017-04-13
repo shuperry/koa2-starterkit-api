@@ -14,12 +14,12 @@
   "homepage": "https://github.com/shuperry/starterkit-api.git#readme",
   "scripts": {
     "start": "cross-env DEBUG=tip NODE_ENV=local nodemon --watch src ./bin/index.js | bunyan -L",
-    "dev": "pm2 start process.json --only crp-legal-api-dev",
-    "sit": "pm2 start process.json --only crp-legal-api-sit",
-    "uat": "pm2 start process.json --only crp-legal-api-uat",
-    "uat_cluster": "pm2 start process.json --only crp-legal-api-uat-cluster",
-    "prod": "pm2 start process.json --only crp-legal-api",
-    "prod_cluster": "pm2 start process.json --only crp-legal-api-cluster"
+    "dev": "pm2 start process.json --only starterkit-api-dev",
+    "sit": "pm2 start process.json --only starterkit-api-sit",
+    "uat": "pm2 start process.json --only starterkit-api-uat",
+    "uat_cluster": "pm2 start process.json --only starterkit-api-uat-cluster",
+    "prod": "pm2 start process.json --only starterkit-api",
+    "prod_cluster": "pm2 start process.json --only starterkit-api-cluster"
   },
   "keywords": [
     "koa2",
