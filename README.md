@@ -15,8 +15,8 @@
 
 ## Quick start
 
-1. Clone this repo using `git clone http://10.59.6.208:9001/legal/crp-legal-api.git`
-2. Run `npm install` to install dependencies.<br />
+1. Clone this repo using `git clone https://github.com/shuperry/starterkit-api.git`.
+2. Run `npm install` to install dependencies.
 3. Run `npm start` to start service in local development mode.
 
 ## Configuration
@@ -28,9 +28,6 @@ We use [nconf](https://www.npmjs.com/package/nconf) to manage configuration betw
 ### production mode
 
 1. Start core serice script: `npm run prod_cluster`.
-2. Start senc rooyee broadcast serice script: `npm run send_broadcast_prod`.
-3. Start execute gokuai api serice script: `npm run exec_gokuai_api_prod`.
-4. Start send broadcast for near case time service script: `npm run send_broadcast_near_case_time_prod`.
 
 > Execute start service script except local env need install pm2 globally: `npm install pm2 -g`.
 
@@ -39,17 +36,11 @@ We use [nconf](https://www.npmjs.com/package/nconf) to manage configuration betw
 * **startup services:**
 
 1. Start core serice script: `npm run dev`.
-2. Start senc rooyee broadcast serice script: `npm run send_broadcast_dev`.
-3. Start execute gokuai api serice script: `npm run exec_gokuai_api_dev`.
-4. Start send broadcast for near case time service script: `npm run send_broadcast_near_case_time_dev`.
 
 * **show log scripts:**
 
 ```bash
-pm2 logs --raw crp-legal-api-dev | bunyan -L
-pm2 logs --raw crp-legal-send-broad-service-dev | bunyan -L
-pm2 logs --raw crp-legal-exec-gokuai-api-service-dev | bunyan -L
-pm2 logs --raw crp-legal-send-broadcast-near-case-time-service-dev | bunyan -L
+pm2 logs --raw starterkit-api-dev | bunyan -L
 ```
 
 ### sit mode
@@ -57,17 +48,11 @@ pm2 logs --raw crp-legal-send-broadcast-near-case-time-service-dev | bunyan -L
 * **startup services:**
 
 1. Start core serice script: `npm run sit`.
-2. Start senc rooyee broadcast serice script: `npm run send_broadcast_sit`.
-3. Start execute gokuai api serice script: `npm run exec_gokuai_api_sit`.
-4. Start send broadcast for near case time service script: `npm run send_broadcast_near_case_time_sit`.
 
 * **show log scripts:**
 
 ```bash
-pm2 logs --raw crp-legal-api-sit | bunyan -L
-pm2 logs --raw crp-legal-send-broad-service-sit | bunyan -L
-pm2 logs --raw crp-legal-exec-gokuai-api-service-sit | bunyan -L
-pm2 logs --raw crp-legal-send-broadcast-near-case-time-service-sit | bunyan -L
+pm2 logs --raw starterkit-api-sit | bunyan -L
 ```
 
 ### uat mode
@@ -75,15 +60,9 @@ pm2 logs --raw crp-legal-send-broadcast-near-case-time-service-sit | bunyan -L
 * **startup services:**
 
 1. Start core serice script: `npm run uat`.
-2. Start senc rooyee broadcast serice script: `npm run send_broadcast_uat`.
-3. Start execute gokuai api serice script: `npm run exec_gokuai_api_uat`.
-4. Start send broadcast for near case time service script: `npm run send_broadcast_near_case_time_uat`.
 
 * **show log scripts:**
 
 ```bash
-pm2 logs --raw crp-legal-api-uat | bunyan -L
-pm2 logs --raw crp-legal-send-broad-service-uat | bunyan -L
-pm2 logs --raw crp-legal-exec-gokuai-api-service-uat | bunyan -L
-pm2 logs --raw crp-legal-send-broadcast-near-case-time-service-uat | bunyan -L
+pm2 logs --raw starterkit-api-uat | bunyan -L
 ```
