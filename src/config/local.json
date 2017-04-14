@@ -5,6 +5,8 @@
     "level": "debug"
   },
   "uploadPath": "/Users/perry/crpower-workspace/testUpload/",
+
+  // redis config.
   "redisServer": {
     "name": "starterkit-redis-dev",
     "host": "127.0.0.1",
@@ -12,7 +14,7 @@
     "options": {
       "connectionName": "starterkit-redis-dev",
       "family": "4",
-      "db": 1,
+      "db": 1, // this db will be used.
       "showFriendlyErrorStack": true
     }
   },
