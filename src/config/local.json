@@ -45,7 +45,6 @@
       "port": 3306,
       "dialect": "mysql",
       "timezone": "+08:00",
-      "logging": true,
       "pool": {
         "max": 50,
         "min": 15,
