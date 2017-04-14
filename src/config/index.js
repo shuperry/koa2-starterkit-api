@@ -14,8 +14,17 @@ const globalConf = {
 }
 
 nconf
-  .add('global', {type: 'literal', store: globalConf})
-  .add('app_env', {type: 'literal', store: JSON.parse(stripJsonComments(fs.readFileSync(path.join(__dirname, `${environment}.json`)).toString()))})
-  .add('app_default', {type: 'literal', store: JSON.parse(stripJsonComments(fs.readFileSync(path.join(__dirname, 'default.json')).toString()))})
+  .add('global', {
+    type: 'literal',
+    store: globalConf
+  })
+  .add('app_env', {
+    type: 'literal',
+    store: JSON.parse(stripJsonComments(fs.readFileSync(path.join(__dirname, `${environment}.json`)).toString()))
+  })
+  .add('app_default', {
+    type: 'literal',
+    store: JSON.parse(stripJsonComments(fs.readFileSync(path.join(__dirname, 'default.json')).toString()))
+  })
 
 export default nconf
