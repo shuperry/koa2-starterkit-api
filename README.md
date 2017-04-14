@@ -12,6 +12,7 @@
 * **[koa-router](https://www.npmjs.com/package/koa-router)**
 * **[koa-multer](https://www.npmjs.com/package/koa-multer)**
 * **[async / await](http://www.ruanyifeng.com/blog/2015/05/async.html)**
+* **[decorator](https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841)**
 
 ## Quick start
 
