@@ -1,5 +1,5 @@
 
-## Backend as a service(BaaS) platform for CRPower Legal app and website.
+## Backend as a service(BaaS) platform.
 
 ## Features
 
