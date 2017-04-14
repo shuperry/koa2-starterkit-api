@@ -11,12 +11,6 @@ import cacheStaticData from './cache-static-data'
 
 global.legal = {}
 
-import {gokuaiApiExecutor} from '../utils/interfaces/gokuai'
-legal.gokuaiApiExecutor = gokuaiApiExecutor
-
-import {rooyeeApiExecutor} from '../utils/interfaces/rooyee'
-legal.rooyeeApiExecutor = rooyeeApiExecutor
-
 // load models.
 import loadModels from './load-models'
 

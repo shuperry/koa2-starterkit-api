@@ -5,7 +5,8 @@ export default (sequelize, DataTypes) => {
     file_id: {
       type: DataTypes.INTEGER,
       field: 'file_id',
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     original_name: {
       type: DataTypes.STRING(500),
@@ -56,23 +57,33 @@ export default (sequelize, DataTypes) => {
     },
     created_at: {
       type: DataTypes.DATE(6),
-      field: 'created_at',
-      get: function () {
-        const created_at = this.getDataValue('created_at')
-        return moment.isDate(created_at) ? moment(created_at).valueOf() : created_at
-      }
+      field: 'created_at'
     },
     updated_at: {
       type: DataTypes.DATE(6),
-      field: 'updated_at',
-      get: function () {
-        const updated_at = this.getDataValue('updated_at')
-        return moment.isDate(updated_at) ? moment(updated_at).valueOf() : updated_at
-      }
+      field: 'updated_at'
     }
   }, {
     timestamps: false,
     tableName: 'LEGAL_FILE',
+    hierarchy: {
+      levelFieldName: 'level',
+      foreignKey: 'parent_id',
+      foreignKeyAttributes: 'parent',
+      throughTable: 'LEGAL_FILE_ANCETORS',
+      throughKey: 'file_id',
+      throughForeignKey: 'parent_file_id'
+    },
+    getterMethods: {
+      created_at () {
+        const created_at = this.getDataValue('created_at')
+        return moment.isDate(created_at) ? moment(created_at).valueOf() : created_at
+      },
+      updated_at () {
+        const updated_at = this.getDataValue('updated_at')
+        return moment.isDate(updated_at) ? moment(updated_at).valueOf() : updated_at
+      }
+    },
     classMethods: {
       associate: ({File}) => {
 

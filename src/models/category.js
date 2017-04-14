@@ -43,19 +43,11 @@ export default (sequelize, DataTypes) => {
     },
     created_at: {
       type: DataTypes.DATE(6),
-      field: 'created_at',
-      get: function () {
-        const created_at = this.getDataValue('created_at')
-        return moment.isDate(created_at) ? moment(created_at).valueOf() : created_at
-      }
+      field: 'created_at'
     },
     updated_at: {
       type: DataTypes.DATE(6),
-      field: 'updated_at',
-      get: function () {
-        const updated_at = this.getDataValue('updated_at')
-        return moment.isDate(updated_at) ? moment(updated_at).valueOf() : updated_at
-      }
+      field: 'updated_at'
     }
   }, {
     timestamps: false,
@@ -67,6 +59,16 @@ export default (sequelize, DataTypes) => {
       throughTable: 'LEGAL_CATEGORY_ANCETORS',
       throughKey: 'category_id',
       throughForeignKey: 'parent_category_id'
+    },
+    getterMethods: {
+      created_at () {
+        const created_at = this.getDataValue('created_at')
+        return moment.isDate(created_at) ? moment(created_at).valueOf() : created_at
+      },
+      updated_at () {
+        const updated_at = this.getDataValue('updated_at')
+        return moment.isDate(updated_at) ? moment(updated_at).valueOf() : updated_at
+      }
     },
     classMethods: {
       associate: ({Category}) => {
