@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
 const getCategories = async ({params}) => {
-  const {models} = legal
+  const {models} = g_api
 
   const {code, parent_id, level, category_id} = params
 
@@ -50,7 +50,7 @@ const getCategories = async ({params}) => {
 }
 
 const getSimpleCategories = async ({params}) => {
-  const {models} = legal
+  const {models} = g_api
 
   const {code, parent_id, level, category_id} = params
 
@@ -67,7 +67,7 @@ const getSimpleCategories = async ({params}) => {
 }
 
 const getCategoryById = async ({category_id}) => {
-  const {models} = legal
+  const {models} = g_api
 
   const where = {category_id}
 
@@ -98,7 +98,7 @@ const getCategoryById = async ({category_id}) => {
 }
 
 const getCategoryByCode = async ({code}) => {
-  const {models} = legal
+  const {models} = g_api
 
   const where = {code}
 
@@ -108,7 +108,7 @@ const getCategoryByCode = async ({code}) => {
 }
 
 const createCategory = async ({params}) => {
-  const {models} = legal
+  const {models} = g_api
 
   const category = await models.Category.create(params)
   return getCategoryById({category_id: category.category_id})

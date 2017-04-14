@@ -41,10 +41,10 @@ export default async (callback) => {
   // 初始化不存在的数据库表.
   await sequelize.sync()
 
-  legal.sequelize = sequelize
-  legal.models = sequelize.models
+  g_api.sequelize = sequelize
+  g_api.models = sequelize.models
 
   if (_.isFunction(callback)) await callback()
 
-  return legal.sequelize
+  return sequelize
 }

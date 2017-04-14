@@ -9,10 +9,9 @@ import config from '../config'
 
 import cacheStaticData from './cache-static-data'
 
-global.legal = {}
-
-// load models.
 import loadModels from './load-models'
+
+global.g_api = {}
 
 const app = new Koa()
 
