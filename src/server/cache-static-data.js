@@ -26,13 +26,13 @@ import * as categoryHelper from '../helpers/category-helper'
 
 import {sendMail} from '../utils/mail-util'
 
+import { time } from 'core-decorators'
 import {decorateArmour} from '../services/common/decorators'
 
 Promise.promisifyAll(request)
 
-
 const testSth = async (client) => {
-  const {models, gokuaiApiExecutor, rooyeeApiExecutor} = legal
+  const {models} = g_api
 
   // const parent_1 = await models.Category.create({
   //   name: '履行/执行报告业务类型',
@@ -141,6 +141,7 @@ class Man{
   }
 
   @decorateArmour
+  @time
   init(def, atk, hp){
     console.log('into init with def =', def, ' atk = ', atk, ' hp = ', hp)
 
@@ -154,12 +155,11 @@ class Man{
 }
 
 export default async () => {
-  const tony = new Man()
+  const tony = new Man(1, 2, 3)
+  const rodi = new Man(4, 5, 6)
 
-  console.log(`当前状态 ===> ${tony}`)
-
-  // create new redis client.
-  const client = await createRedisClient()
+  console.log(`tony 当前状态 ===> ${tony}`)
+  console.log(`rodi 当前状态 ===> ${rodi}`)
 
   let categoriesCodeMap = {},
     categoriesIdMap = {},
@@ -175,8 +175,11 @@ export default async () => {
     categoriesIdMap[categoryJson.category_id] = categoryJson
   })
 
-  legal.categoriesCodeMap = categoriesCodeMap
-  legal.categoriesIdMap = categoriesIdMap
+  g_api.categoriesCodeMap = categoriesCodeMap
+  g_api.categoriesIdMap = categoriesIdMap
+
+  // create new redis client.
+  const client = await createRedisClient()
 
   // await testRedis(client)
 
