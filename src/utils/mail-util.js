@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport(config.get('mail:sender'))
 const mailOptions = merge({}, config.get('mail:options'))
 
 /**
- *
+ * function for send Email.
  * @param receiver 收件人
  * @param subject 主题
  * @param text 文本格式邮件内容
