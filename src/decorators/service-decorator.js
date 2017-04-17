@@ -9,6 +9,8 @@ const transaction = async (target, key, descriptor) => {
   }
 
   console.log('into decoration transaction with target = ', target, ' key = ', key, ' descriptor = ', descriptor)
+
+
 }
 
 const decorateArmour = (target, key, descriptor) => {
@@ -26,6 +28,7 @@ const decorateArmour = (target, key, descriptor) => {
     args[0] += moreDef
     return fn.apply(target, args)
   }
+
   return descriptor
 }
 

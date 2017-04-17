@@ -27,7 +27,7 @@ import * as categoryHelper from '../helpers/category-helper'
 import {sendMail} from '../utils/mail-util'
 
 import { time } from 'core-decorators'
-import {decorateArmour} from '../services/common/decorators'
+import {decorateArmour} from '../decorators/service-decorator'
 
 Promise.promisifyAll(request)
 

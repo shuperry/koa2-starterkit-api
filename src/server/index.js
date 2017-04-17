@@ -28,11 +28,6 @@ const hooks = [
   'router'
 ]
 
-hooks
-  .map(hookName => path.resolve(__dirname, 'hooks', hookName))
-  .map(fileName => require(fileName).default)
-  .forEach(hook => hook(app))
-
 app.listen(config.get('port'), async (err) => {
   if (err) {
     const pretty = new PrettyError()
@@ -45,6 +40,11 @@ app.listen(config.get('port'), async (err) => {
 
   // cache static data after server started.
   await cacheStaticData()
+
+  hooks
+    .map(hookName => path.resolve(__dirname, 'hooks', hookName))
+    .map(fileName => require(fileName).default)
+    .forEach(hook => hook(app))
 
   appStartedLogger('http', config.get('name'), config.get('port'))
 })

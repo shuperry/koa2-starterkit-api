@@ -3,6 +3,7 @@ import path from 'path'
 import _ from 'lodash'
 import isFunction from 'lodash.isfunction'
 import values from 'lodash.values'
+import cls from 'continuation-local-storage'
 import fs from 'fs-plus'
 
 import hierachy from 'sequelize-hierarchy'
@@ -10,7 +11,10 @@ import hierachy from 'sequelize-hierarchy'
 import config from '../config'
 import logger from '../logger'
 
+const namespace = cls.createNamespace('g_api_cls')
+
 const Sequelize = hierachy(require('sequelize'))
+Sequelize.cls = namespace
 
 const sequelize = new Sequelize(
   config.get('db:database'),
