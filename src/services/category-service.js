@@ -1,6 +1,6 @@
 import {transaction} from '../decorators/service-decorator'
 
-import * as categoryHelper from '../helpers/category-helper'
+import categoryHelper from '../helpers/category-helper'
 
 import * as redisUtil from '../utils/redis-util'
 

@@ -22,7 +22,7 @@ import logger from '../logger'
 
 import createRedisClient from './redis-client'
 
-import * as categoryHelper from '../helpers/category-helper'
+import categoryHelper from '../helpers/category-helper'
 
 import {sendMail} from '../utils/mail-util'
 
