@@ -14,7 +14,7 @@ import logger from '../logger'
 const namespace = cls.createNamespace('g_api_cls')
 
 const Sequelize = hierachy(require('sequelize'))
-Sequelize.cls = namespace
+Sequelize.useCLS(namespace)
 
 const sequelize = new Sequelize(
   config.get('db:database'),
@@ -47,6 +47,7 @@ export default async (callback) => {
 
   g_api.sequelize = sequelize
   g_api.models = sequelize.models
+  g_api.cls = namespace
 
   if (_.isFunction(callback)) await callback()
 

@@ -111,6 +111,11 @@ const createCategory = async ({params}) => {
   const {models} = g_api
 
   const category = await models.Category.create(params)
+
+  // if (1 === 1) {
+  //   throw new Error('into throw new error, testing transaction.')
+  // }
+
   return getCategoryById({category_id: category.category_id})
 }
 

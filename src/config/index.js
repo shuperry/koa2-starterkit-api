@@ -20,11 +20,11 @@ nconf
   })
   .add('app_env', {
     type: 'literal',
-    store: JSON.parse(stripJsonComments(fs.readFileSync(path.join(__dirname, `${environment}.json`)).toString()))
+    store: require(path.join(__dirname, `${environment}`)).default
   })
   .add('app_default', {
     type: 'literal',
-    store: JSON.parse(stripJsonComments(fs.readFileSync(path.join(__dirname, 'default.json')).toString()))
+    store: require(path.join(__dirname, 'default')).default
   })
 
 export default nconf
