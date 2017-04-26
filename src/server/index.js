@@ -16,16 +16,19 @@ global.g_api = {}
 const app = new Koa()
 
 const hooks = [
+  // 'response-time',
+  // 'helmet',
   'cors',
   'global-error-handler',
-  'i18n',
   'body-parser',
+  'querystring',
   'etag',
   'redis-pool',
   // 'mysql-pool',
-  'querystring',
   // 'timeout',
-  'router'
+  'i18n',
+  'router',
+  // 'static-service'
 ]
 
 app.listen(config.get('port'), async (err) => {
