@@ -1,8 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 
-import stripJsonComments from 'strip-json-comments'
-
 import {Provider} from 'nconf/lib/nconf/provider'
 
 const environment = process.env.NODE_ENV || 'local'
