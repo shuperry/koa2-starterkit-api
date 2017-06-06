@@ -14,7 +14,7 @@ import logger from '../logger'
 const namespace = cls.createNamespace('g_api_cls')
 
 const Sequelize = hierachy(require('sequelize'))
-Sequelize.useCLS(namespace)
+Sequelize.cls = namespace
 
 const sequelize = new Sequelize(
   config.get('db:database'),

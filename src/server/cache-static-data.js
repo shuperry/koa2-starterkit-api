@@ -149,6 +149,7 @@ class Man{
     this.atk = atk  // 攻击力
     this.hp = hp  // 血量
   }
+
   toString(){
     return `防御力:${this.def}, 攻击力:${this.atk}, 血量:${this.hp}`
   }
@@ -160,6 +161,15 @@ export default async () => {
 
   console.log(`tony 当前状态 ===> ${tony}`)
   console.log(`rodi 当前状态 ===> ${rodi}`)
+
+  const propNames = Object.getOwnPropertyNames(Object.getPrototypeOf(tony))
+  propNames.forEach(propName => {
+    console.log('propName = ', propName)
+    console.log('prop = ', tony[propName])
+    console.log('prop is function = ', _.isFunction(tony[propName]))
+  })
+
+  console.log('functions =', Object.getOwnPropertyNames(Object.getPrototypeOf(tony)))
 
   let categoriesCodeMap = {},
     categoriesIdMap = {},

@@ -11,49 +11,57 @@ export default (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    log_type: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      field: 'log_type',
-      comment: '日志类型: 0: 操作日志, 1: 异常日志.'
-    },
-    method_Name: {
+    request_name: {
       type: DataTypes.STRING(500),
       defaultValue: '',
-      field: 'method_Name'
+      field: 'request_name',
+      comment: '请求名称.'
     },
-    method_description: {
-      type: DataTypes.STRING(1000),
-      field: 'method_description'
+    request_path: {
+      type: DataTypes.STRING(500),
+      defaultValue: '',
+      field: 'request_path',
+      comment: '请求路径.'
     },
     request_params: {
       type: DataTypes.TEXT,
-      field: 'request_params'
+      field: 'request_params',
+      comment: '请求参数.'
+    },
+    request_description: {
+      type: DataTypes.STRING(1000),
+      field: 'request_description',
+      comment: '请求说明.'
     },
     error_code: {
       type: DataTypes.STRING(500),
       defaultValue: '',
-      field: 'error_code'
+      field: 'error_code',
+      comment: '错误编号.'
     },
     error_message: {
       type: DataTypes.TEXT,
-      field: 'error_message'
+      field: 'error_message',
+      comment: '错误消息.'
     },
     error_stack: {
       type: DataTypes.TEXT,
-      field: 'error_stack'
+      field: 'error_stack',
+      comment: '错误栈内容.'
     },
     created_at: {
       type: DataTypes.DATE(6),
-      field: 'created_at'
+      field: 'created_at',
+      comment: '日志创建时间.'
     },
-    updated_at: {
-      type: DataTypes.DATE(6),
-      field: 'updated_at'
+    created_by: {
+      type: DataTypes.STRING(500),
+      field: 'created_by',
+      comment: '操作人 ldap 用户名.'
     }
   }, {
     timestamps: false,
-    tableName: 'LEGAL_LOG',
+    tableName: 'CRP_LOG',
     comment: '系统日志表',
     getterMethods: {
       created_at () {
@@ -66,17 +74,32 @@ export default (sequelize, DataTypes) => {
       }
     },
     classMethods: {
-      associate: ({Log, File}) => {
-
+      associate: ({Log, Category}) => {
+        Log.belongsTo(Category, {
+          foreignKey: 'sys_name_id',
+          as: 'sys_name',
+          comment: '系统名称.'
+        })
+        Log.belongsTo(Category, {
+          foreignKey: 'log_type_id',
+          as: 'log_type',
+          comment: '日志类型.'
+        })
+        Log.belongsTo(Category, {
+          foreignKey: 'operate_type_id',
+          as: 'operate_type',
+          comment: '操作类型.'
+        })
+        Log.belongsTo(Category, {
+          foreignKey: 'request_method_id',
+          as: 'request_method',
+          comment: '请求方法名称.'
+        })
       }
     },
     hooks: {
       beforeCreate: (instance) => {
         instance.created_at = Number(new Date())
-        instance.updated_at = Number(new Date())
-      },
-      beforeUpdate: (instance) => {
-        instance.updated_at = Number(new Date())
       }
     }
   })

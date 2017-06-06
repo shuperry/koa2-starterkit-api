@@ -1,6 +1,6 @@
 export default {
   name: 'starterkit-api[DEV]',
-  port: 7443,
+  port: 7444,
   log: {
     level: 'debug'
   },

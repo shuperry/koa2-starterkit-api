@@ -2,7 +2,7 @@ import path from 'path'
 
 import {Pool} from 'generic-pool'
 import Debug from 'debug'
-import mysql2 from 'mysql2'
+import mysql from 'mysql'
 
 import config from '../../config'
 import logger from '../../logger'
@@ -15,7 +15,7 @@ export default (app) => {
   const mysqlPool = new Pool({
     name: 'mysql',
     create: cb => {
-      const c = mysql2.createConnection({
+      const c = mysql.createConnection({
         user: config.get('db:username'),
         password: config.get('db:password'),
         database: config.get('db:database')

@@ -51,12 +51,12 @@ export default (sequelize, DataTypes) => {
     }
   }, {
     timestamps: false,
-    tableName: 'LEGAL_CATEGORY',
+    tableName: 'CRP_CATEGORY',
     hierarchy: {
       levelFieldName: 'level',
       foreignKey: 'parent_id',
       foreignKeyAttributes: 'parent',
-      throughTable: 'LEGAL_CATEGORY_ANCETORS',
+      throughTable: 'CRP_CATEGORY_ANCETORS',
       throughKey: 'category_id',
       throughForeignKey: 'parent_category_id'
     },
