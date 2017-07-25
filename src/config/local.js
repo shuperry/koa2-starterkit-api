@@ -8,11 +8,12 @@ export default {
 
   // redis config.
   redisServer: {
-    name: 'starterkit-redis-dev',
+    keyPrefix: 'startkit_local_',
+    name: 'starterkit-redis-local',
     host: '127.0.0.1',
     port: 6379,
     options: {
-      connectionName: 'starterkit-redis-dev',
+      connectionName: 'starterkit-redis-local',
       family: '4',
       db: 1, // this db will be used.
       showFriendlyErrorStack: true

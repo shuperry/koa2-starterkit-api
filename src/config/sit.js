@@ -6,6 +6,7 @@ export default {
   },
   uploadPath: '/apps/crpower/attachments/starterkit-api-sit',
   redisServer: {
+    keyPrefix: 'startkit_sit_',
     name: 'starterkit-redis-sit',
     host: '10.59.6.209',
     port: 6379,

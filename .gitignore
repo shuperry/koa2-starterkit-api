@@ -11,4 +11,3 @@ logs
 .DS_Store
 npm-debug.*
 .idea
-*.iml

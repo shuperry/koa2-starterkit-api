@@ -1,5 +1,3 @@
-import path from 'path'
-
 import Koa from 'koa'
 import PrettyError from 'pretty-error'
 
@@ -11,25 +9,11 @@ import cacheStaticData from './cache-static-data'
 
 import loadModels from './load-models'
 
+import loadHooks from './load-hooks'
+
 global.g_api = {}
 
 const app = new Koa()
-
-const hooks = [
-  // 'response-time',
-  // 'helmet',
-  'cors',
-  'global-error-handler',
-  'body-parser',
-  'querystring',
-  'etag',
-  'redis-pool',
-  // 'mysql-pool',
-  // 'timeout',
-  'i18n',
-  'router',
-  // 'static-service'
-]
 
 app.listen(config.get('port'), async (err) => {
   if (err) {
@@ -44,10 +28,7 @@ app.listen(config.get('port'), async (err) => {
   // cache static data after server started.
   await cacheStaticData()
 
-  hooks
-    .map(hookName => path.resolve(__dirname, 'hooks', hookName))
-    .map(fileName => require(fileName).default)
-    .forEach(hook => hook(app))
+  await loadHooks({app})
 
   appStartedLogger('http', config.get('name'), config.get('port'))
 })

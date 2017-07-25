@@ -1,8 +1,12 @@
 import _ from 'lodash'
 
+import config from '../config'
+
+const app_key_prefix = config.get('redisServer:keyPrefix')
+
 const store = async (redisClient, keyPrefix = '', key, objVal) => {
   if (redisClient) {
-    const res = await redisClient.set(keyPrefix + key, JSON.stringify(objVal))
+    const res = await redisClient.set(app_key_prefix + keyPrefix + key, JSON.stringify(objVal))
     return res === 'OK' ? 'OK' : 'wrong'
   }
 }
@@ -11,9 +15,9 @@ const get = async (redisClient, keyPrefix = '', key) => {
   if (redisClient) {
     let res
     try {
-      res = JSON.parse(await redisClient.get(keyPrefix + key))
+      res = JSON.parse(await redisClient.get(app_key_prefix + keyPrefix + key))
     } catch (e) {
-      res = await redisClient.get(keyPrefix + key)
+      res = await redisClient.get(app_key_prefix + keyPrefix + key)
     }
     return res
   }
@@ -28,7 +32,7 @@ const multiGet = async (redisClient, keyPrefix = '', keys = []) => {
     if (_.isArray(keys)) {
       keys.forEach(key => multiGetArr.push([
         'get',
-        keyPrefix + key
+        app_key_prefix + keyPrefix + key
       ]))
 
       const vals = await redisClient.pipeline(multiGetArr).exec()
@@ -49,7 +53,7 @@ const multiGet = async (redisClient, keyPrefix = '', keys = []) => {
 
 const del = async (redisClient, keyPrefix = '', key) => {
   if (redisClient) {
-    const res = await redisClient.del(keyPrefix + key)
+    const res = await redisClient.del(app_key_prefix + keyPrefix + key)
     return res === 0 ? 'OK' : 'wrong'
   }
 }
@@ -61,7 +65,7 @@ const batchDel = async (redisClient, keyPrefix = '', keys = []) => {
     if (_.isArray(keys)) {
       keys.forEach(key => multiDelArr.push([
         'del',
-        keyPrefix + key
+        app_key_prefix + keyPrefix + key
       ]))
 
       await redisClient.pipeline(multiDelArr).exec()
