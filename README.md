@@ -22,7 +22,7 @@
 
 ## Configuration
 
-We use [nconf](https://www.npmjs.com/package/nconf) to manage configuration between different environment, the configuration of current environment file name is just the same as environment, and it is extend with `src/config/default.json`. 
+We use [nconf](https://www.npmjs.com/package/nconf) to manage configuration between different environment, the configuration of current environment file name is just the same as environment, and it is extend with `src/config/default.js`. 
 
 ## Environments
 
