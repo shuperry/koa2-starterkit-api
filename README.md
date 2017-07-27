@@ -17,7 +17,7 @@
 ## Quick start
 
 1. Clone this repo using `git clone https://github.com/shuperry/starterkit-api.git`.
-2. Run `npm install` to install dependencies.
+2. Run `npm install` or `yarn` to install dependencies.
 3. Run `npm start` to start service in local development mode.
 
 ## Configuration
