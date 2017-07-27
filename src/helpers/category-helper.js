@@ -1,21 +1,96 @@
 import _ from 'lodash'
 
 class CategoryHelper {
-  async getCategories({params}) {
+  async getCategories({name, code, parent_id, category_id, keyText}) {
     const {models} = g_api
 
-    const {code, parent_id, level, category_id} = params
-
     let categories
-    if (!_.isUndefined(code) || !_.isUndefined(parent_id) || !_.isUndefined(level) || !_.isUndefined(category_id)) {
+    if (!_.isUndefined(parent_id)) {
+      categories = await models.Category.find({
+        where: {
+          category_id: parent_id
+        },
+        include: [
+          {
+            model: models.Category,
+            as: 'descendents',
+            hierarchy: true
+          }
+        ],
+        order: [
+          [
+            {
+              model: models.Category,
+              as: 'descendents'
+            },
+            'rank',
+            'ASC'
+          ]
+        ]
+      })
+    } else if (!_.isUndefined(category_id)) {
+      categories = await models.Category.find({
+        where: {
+          category_id
+        },
+        include: [
+          {
+            model: models.Category,
+            as: 'descendents',
+            hierarchy: true
+          }
+        ],
+        order: [
+          [
+            {
+              model: models.Category,
+              as: 'descendents'
+            },
+            'rank',
+            'ASC'
+          ]
+        ]
+      })
+    } else if (!_.isUndefined(code)) {
+      categories = await models.Category.find({
+        where: {
+          code
+        },
+        include: [
+          {
+            model: models.Category,
+            as: 'descendents',
+            hierarchy: true
+          }
+        ],
+        order: [
+          [
+            {
+              model: models.Category,
+              as: 'descendents'
+            },
+            'rank',
+            'ASC'
+          ]
+        ]
+      })
+    } else if (!_.isUndefined(name) || !_.isUndefined(keyText)) {
       const where = {}
 
-      if (!_.isUndefined(code)) where['code'] = code
-      if (!_.isUndefined(parent_id)) where['parent_id'] = parent_id
-      if (!_.isUndefined(level)) where['level'] = level
-      if (!_.isUndefined(category_id)) where['category_id'] = category_id
+      if (!_.isUndefined(name)) where['name'] = {$like: `%${name}%`}
 
-      categories = await models.Category.find({
+      if (!_.isUndefined(keyText)) {
+        where['$or'] = [
+          {
+            name: {$like: `%${keyText}%`}
+          },
+          {
+            code: {$like: `%${keyText}%`}
+          }
+        ]
+      }
+
+      categories = await models.Category.findAll({
         where,
         include: [
           {
@@ -25,6 +100,10 @@ class CategoryHelper {
           }
         ],
         order: [
+          [
+            'rank',
+            'ASC'
+          ],
           [
             {
               model: models.Category,
@@ -50,7 +129,7 @@ class CategoryHelper {
     return categories
   }
 
-  async getSimpleCategories({params}) {
+  async getSimpleCategories(params) {
     const {models} = g_api
 
     const {code, parent_id, level, category_id} = params
@@ -108,7 +187,7 @@ class CategoryHelper {
     })
   }
 
-  async createCategory({params}) {
+  async createCategory(params) {
     const {models} = g_api
 
     const category = await models.Category.create(params)

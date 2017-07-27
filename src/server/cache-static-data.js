@@ -35,32 +35,30 @@ const testSth = async (client) => {
   const {models} = g_api
 
   // const parent_1 = await models.Category.create({
-  //   name: '履行/执行报告业务类型',
-  //   code: 'exec_report_business_type',
-  //   rank: 20
+  //   name: '性别',
+  //   code: 'gender',
+  //   rank: 1
   // })
   // await models.Category.create({
-  //   name: '履行报告',
-  //   code: 'exec_report_business_type_perform',
-  //   relate_parent_code: 'case_judged_no_need_perform,case_judged_wait_perform,case_judged_performing',
+  //   name: '男',
+  //   code: 'gender_male',
   //   rank: 1,
   //   parent_id: parent_1.category_id
   // })
   // await models.Category.create({
-  //   name: '执行报告',
-  //   code: 'exec_report_business_type_do',
-  //   relate_parent_code: 'case_judged_doing',
+  //   name: '女',
+  //   code: 'gender_female',
   //   rank: 2,
   //   parent_id: parent_1.category_id
   // })
 
-  // testing send email.
-  const sendMailResult = await mailUtil.sendMail({
-    receiver: 'cn.shperry@gmail.com',
-    subject: 'Test sending email with nodeJS',
-    text: 'Hello! This is a test email sent with nodeJS.'
-  })
-  console.log('sendMailResult = ', sendMailResult)
+  // // testing send email.
+  // const sendMailResult = await mailUtil.sendMail({
+  //   receiver: 'cn.shperry@gmail.com',
+  //   subject: 'Test sending email with nodeJS',
+  //   text: 'Hello! This is a test email sent with nodeJS.'
+  // })
+  // console.log('sendMailResult = ', sendMailResult)
 
   // // testing write data to csv file.
   // const fields = ['field3', 'field4', 'field1', 'field2']
@@ -175,7 +173,7 @@ export default async () => {
     categoriesIdMap = {},
     categoryJson = {}
 
-  const categories = await categoryHelper.getSimpleCategories({params: {}})
+  const categories = await categoryHelper.getSimpleCategories({})
   categories.forEach(category => {
     categoryJson = JSON.parse(JSON.stringify(category))
 
