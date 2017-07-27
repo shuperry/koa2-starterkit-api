@@ -16,7 +16,6 @@ const hooks = [
   // 'timeout',
   'i18n',
   'router',
-  'history-api-fallback',
   // 'static-service'
 ]
 

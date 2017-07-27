@@ -24,13 +24,17 @@ export default {
   },
   mail: {
     sender: {
-      host: 'smtp.crc.com.hk',
-      port: 25,
-      auth: false
+      service: 'qq',
+      auth: {
+        user: '576507045@qq.com',
+        pass: 'xxxxx'
+      }
     },
     options: {
-      from: 'no.reply@crpower.com.cn'
-    }
+      from: '舒培培 <576507045@qq.com>'
+    },
+    retryTimes: 5,
+    retryInterval: 50
   },
   hooks: {
     i18n: {

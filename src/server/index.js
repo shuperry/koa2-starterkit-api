@@ -25,12 +25,12 @@ app.listen(config.get('port'), async (err) => {
   // load models.
   await loadModels()
 
-  // cache static data after server started.
-  await cacheStaticData()
-
   await loadHooks({app})
 
   appStartedLogger('http', config.get('name'), config.get('port'))
+
+  // cache static data after server started.
+  await cacheStaticData()
 })
 
 export default app
