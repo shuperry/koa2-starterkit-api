@@ -1,9 +1,14 @@
-const reverse = (source) => {
-  return source.split('').reverse().join('')
+class StringUtil {
+  constructor() {
+  }
+
+  static reverse(source) {
+    return source.split('').reverse().join('')
+  }
+
+  static replaceLast(source, replaceMent, target) {
+    return reverse(reverse(source).replace(new RegExp(reverse(replaceMent)), reverse(target)))
+  }
 }
 
-const replaceLast = (source, replaceMent, target) => {
-  return reverse(reverse(source).replace(new RegExp(reverse(replaceMent)), reverse(target)))
-}
-
-export {reverse, replaceLast}
+export default StringUtil

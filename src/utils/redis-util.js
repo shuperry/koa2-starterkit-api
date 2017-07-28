@@ -3,24 +3,27 @@ import _ from 'lodash'
 import config from '../config'
 
 class RedisUtil {
+  static app_key_prefix = config.get('redisServer:keyPrefix')
+
   constructor() {
-    this.app_key_prefix = config.get('redisServer:keyPrefix')
   }
 
-  async store(redisClient, keyPrefix = '', key, objVal) {
+  static async store(redisClient, keyPrefix = '', key, objVal) {
+    console.log('redis util store RedisUtil.app_key_prefix = ', RedisUtil.app_key_prefix)
+
     if (redisClient) {
-      const res = await redisClient.set(this.app_key_prefix + keyPrefix + key, JSON.stringify(objVal))
+      const res = await redisClient.set(RedisUtil.app_key_prefix + keyPrefix + key, JSON.stringify(objVal))
       return res === 'OK' ? 'OK' : 'wrong'
     }
   }
 
-  async get(redisClient, keyPrefix = '', key) {
+  static async get(redisClient, keyPrefix = '', key) {
     if (redisClient) {
       let res
       try {
-        res = JSON.parse(await redisClient.get(this.app_key_prefix + keyPrefix + key))
+        res = JSON.parse(await redisClient.get(RedisUtil.app_key_prefix + keyPrefix + key))
       } catch (e) {
-        res = await redisClient.get(this.app_key_prefix + keyPrefix + key)
+        res = await redisClient.get(RedisUtil.app_key_prefix + keyPrefix + key)
       }
       return res
     }
@@ -28,14 +31,14 @@ class RedisUtil {
     return null
   }
 
-  async multiGet(redisClient, keyPrefix = '', keys = []) {
+  static async multiGet(redisClient, keyPrefix = '', keys = []) {
     if (redisClient) {
       const multiGetArr = [], results = []
 
       if (_.isArray(keys)) {
         keys.forEach(key => multiGetArr.push([
           'get',
-          this.app_key_prefix + keyPrefix + key
+          RedisUtil.app_key_prefix + keyPrefix + key
         ]))
 
         const vals = await redisClient.pipeline(multiGetArr).exec()
@@ -54,21 +57,21 @@ class RedisUtil {
     return null
   }
 
-  async del(redisClient, keyPrefix = '', key) {
+  static async del(redisClient, keyPrefix = '', key) {
     if (redisClient) {
-      const res = await redisClient.del(this.app_key_prefix + keyPrefix + key)
+      const res = await redisClient.del(RedisUtil.app_key_prefix + keyPrefix + key)
       return res === 0 ? 'OK' : 'wrong'
     }
   }
 
-  async batchDel(redisClient, keyPrefix = '', keys = []) {
+  static async batchDel(redisClient, keyPrefix = '', keys = []) {
     if (redisClient) {
       const multiDelArr = []
 
       if (_.isArray(keys)) {
         keys.forEach(key => multiDelArr.push([
           'del',
-          this.app_key_prefix + keyPrefix + key
+          RedisUtil.app_key_prefix + keyPrefix + key
         ]))
 
         await redisClient.pipeline(multiDelArr).exec()
@@ -77,4 +80,4 @@ class RedisUtil {
   }
 }
 
-export default new RedisUtil()
+export default RedisUtil

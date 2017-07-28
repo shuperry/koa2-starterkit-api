@@ -4,7 +4,7 @@ import Router from 'koa-router'
 
 import categoryService from '../services/category-service'
 
-import {checkRequireParam, checkParamType, dealSpecialParam} from '../utils/router-util'
+import routerUtil from '../utils/router-util'
 
 const router = new Router()
 
@@ -12,10 +12,10 @@ router.get('/categories/', async (ctx, next) => {
   const params = ctx.query
 
   // deal with date type & undefined or null value params.
-  dealSpecialParam(params)
+  routerUtil.dealSpecialParam(params)
 
   // check param types.
-  const checkParamTypeMsg = checkParamType(params, [
+  const checkParamTypeMsg = routerUtil.checkParamType(params, [
     'code',
     {
       name: 'category_id',
@@ -58,7 +58,7 @@ router.post('/categories/', async (ctx, next) => {
   const params = ctx.request.body
 
   // deal with date type & undefined or null value params.
-  dealSpecialParam(params)
+  routerUtil.dealSpecialParam(params)
 
   const result = await categoryService.createCategory({
     ctx,
@@ -77,10 +77,10 @@ router.get('/categories/:category_id', async (ctx, next) => {
   const params = ctx.params
 
   // deal with date type & undefined or null value params.
-  dealSpecialParam(params)
+  routerUtil.dealSpecialParam(params)
 
   // check required param.
-  const checkRequireParamMsg = checkRequireParam(params, ['category_id'], ['通用类别id'])
+  const checkRequireParamMsg = routerUtil.checkRequireParam(params, ['category_id'], ['通用类别id'])
   if (true !== checkRequireParamMsg) {
     ctx.body = {
       status: 400,
@@ -90,7 +90,7 @@ router.get('/categories/:category_id', async (ctx, next) => {
   }
 
   // check param types.
-  const checkParamTypeMsg = checkParamType(params, [
+  const checkParamTypeMsg = routerUtil.checkParamType(params, [
     {
       name: 'category_id',
       type: 'integer'
@@ -134,7 +134,7 @@ router.patch('/categories/:category_id', async (ctx, next) => {
   const params = merge(ctx.request.body, ctx.params)
 
   // deal with date type & undefined or null value params.
-  dealSpecialParam(params)
+  routerUtil.dealSpecialParam(params)
 
   const messages = {
     notExists: '通用类别数据不存在'
