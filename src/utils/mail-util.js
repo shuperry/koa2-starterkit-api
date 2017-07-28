@@ -22,7 +22,7 @@ class MailUtil {
   /**
    * 发送邮件给单独一个用户.
    *
-   * @param receiver<Array> 收件人 (支持字符串和字符串数组格式).
+   * @param receiver<String/Array> 收件人 (支持字符串和字符串数组格式).
    * @param subject 主题.
    * @param text 文本格式邮件内容.
    * @param html 网页格式邮件内容.
