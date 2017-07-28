@@ -11,11 +11,12 @@ import logger from '../logger'
 Promise.promisifyAll(async)
 
 class MailUtil {
+  static mailOptions = merge({}, config.get('mail:options'))
+
   constructor() {
-    this.mailOptions = merge({}, config.get('mail:options'))
   }
 
-  getTransporter() {
+  static getTransporter() {
     return nodemailer.createTransport(config.get('mail:sender'))
   }
 
@@ -31,7 +32,7 @@ class MailUtil {
    * @returnParam failed 邮件发送失败的邮件地址.
    * @returnParam wrong 格式不正确的邮件地址.
    */
-  async sendMail({receiver, subject, text, html}) {
+  static async sendMail({receiver, subject, text, html}) {
     const seriesJobs = []
     const successful = [], failed = [], wrong = []
 
@@ -50,7 +51,7 @@ class MailUtil {
           }
         }, async (cb) => {
           try {
-            await this.getTransporter().sendMail(merge({}, this.mailOptions, {
+            await MailUtil.getTransporter().sendMail(merge({}, MailUtil.mailOptions, {
               to: receiver,
               subject,
               text,
@@ -93,4 +94,4 @@ class MailUtil {
   }
 }
 
-export default new MailUtil()
+export default MailUtil

@@ -9,8 +9,6 @@ class RedisUtil {
   }
 
   static async store(redisClient, keyPrefix = '', key, objVal) {
-    console.log('redis util store RedisUtil.app_key_prefix = ', RedisUtil.app_key_prefix)
-
     if (redisClient) {
       const res = await redisClient.set(RedisUtil.app_key_prefix + keyPrefix + key, JSON.stringify(objVal))
       return res === 'OK' ? 'OK' : 'wrong'

@@ -24,7 +24,7 @@ import createRedisClient from './redis-client'
 
 import categoryHelper from '../helpers/category-helper'
 
-import mailUtil from '../utils/mail-util'
+import MailUtil from '../utils/mail-util'
 
 import { time } from 'core-decorators'
 import {decorateArmour} from '../decorators/service-decorator'
@@ -52,13 +52,13 @@ const testSth = async (client) => {
   //   parent_id: parent_1.category_id
   // })
 
-  // // testing send email.
-  // const sendMailResult = await mailUtil.sendMail({
-  //   receiver: 'cn.shperry@gmail.com',
-  //   subject: 'Test sending email with nodeJS',
-  //   text: 'Hello! This is a test email sent with nodeJS.'
-  // })
-  // console.log('sendMailResult = ', sendMailResult)
+  // testing send email.
+  const sendMailResult = await MailUtil.sendMail({
+    receiver: 'cn.shperry@gmail.com',
+    subject: 'Test sending email with nodeJS',
+    text: 'Hello! This is a test email sent with nodeJS.'
+  })
+  console.log('sendMailResult = ', sendMailResult)
 
   // // testing write data to csv file.
   // const fields = ['field3', 'field4', 'field1', 'field2']
