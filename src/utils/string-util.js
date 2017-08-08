@@ -2,15 +2,13 @@ class StringUtil {
   constructor() {
   }
 
-  reverse(source) {
+  static reverse(source) {
     return source.split('').reverse().join('')
   }
 
-  replaceLast(source, replaceMent, target) {
-    const _this = this
-
-    return _this.reverse(_this.reverse(source).replace(new RegExp(_this.reverse(replaceMent)), _this.reverse(target)))
+  static replaceLast(source, replaceMent, target) {
+    return StringUtil.reverse(StringUtil.reverse(source).replace(new RegExp(StringUtil.reverse(replaceMent)), StringUtil.reverse(target)))
   }
 }
 
-export default new StringUtil()
+export default StringUtil
