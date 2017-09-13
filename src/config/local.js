@@ -8,7 +8,7 @@ export default {
 
   // redis config.
   redisServer: {
-    keyPrefix: 'startkit_local_',
+    keyPrefix: 'starterkit_local_',
     name: 'starterkit-redis-local',
     host: '127.0.0.1',
     port: 6379,

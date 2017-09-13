@@ -6,7 +6,7 @@ export default {
   },
   uploadPath: '/apps/law/attachments/starterkit-api',
   redisServer: {
-    keyPrefix: 'startkit_',
+    keyPrefix: 'starterkit_',
     name: 'starterkit-redis',
     host: '10.59.6.224',
     port: 16379,
