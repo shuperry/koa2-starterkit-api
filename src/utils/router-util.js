@@ -117,11 +117,10 @@ class RouterUtil {
         type = paramName.type
       } else if (typeof paramName === 'string') {
         name = paramName
-        type = 'string'
-      } else {
-        name = paramName.name
-        type = paramName.type
       }
+
+      // 字段类型默认值为字符串.
+      type = type || 'string'
 
       if (!_.isUndefined(param[name])) {
         if (type === 'integer') {
