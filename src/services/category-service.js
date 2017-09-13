@@ -21,7 +21,7 @@ class CategoryService {
   async getCategoryById({ctx, params}) {
     const {category_id} = params
 
-    const category = JSON.parse(await ctx.redis.get(category_id)) || await categoryHelper.getCategoryById({category_id})
+    const category = await RedisUtil.get(ctx.redis, 'category_', category_id) || await categoryHelper.getCategoryById({category_id})
 
     if (!!category) {
       RedisUtil.store(ctx.redis, 'category_', category.category_id, category)

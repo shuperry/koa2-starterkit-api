@@ -1,7 +1,7 @@
 import moment from 'moment'
 
 export default (sequelize, DataTypes) => {
-  return sequelize.define('Category', {
+  const model = sequelize.define('Category', {
     category_id: {
       type: DataTypes.INTEGER,
       field: 'category_id',
@@ -17,20 +17,6 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING(100),
       defaultValue: '',
       field: 'code'
-    },
-    relate_parent_code: {
-      type: DataTypes.STRING(2000),
-      defaultValue: '',
-      field: 'relate_parent_code'
-    },
-    labels: {
-      type: DataTypes.TEXT,
-      field: 'labels'
-    },
-    value: {
-      type: DataTypes.STRING(100),
-      defaultValue: '',
-      field: 'value'
     },
     rank: {
       type: DataTypes.DOUBLE(11, 4),
@@ -62,17 +48,12 @@ export default (sequelize, DataTypes) => {
     },
     getterMethods: {
       created_at () {
-        const created_at = this.getDataValue('created_at')
-        return moment.isDate(created_at) ? moment(created_at).valueOf() : created_at
+        const dataVal = this.getDataValue('created_at')
+        return moment.isDate(dataVal) ? moment(dataVal).valueOf() : dataVal
       },
       updated_at () {
-        const updated_at = this.getDataValue('updated_at')
-        return moment.isDate(updated_at) ? moment(updated_at).valueOf() : updated_at
-      }
-    },
-    classMethods: {
-      associate: ({Category}) => {
-
+        const dataVal = this.getDataValue('updated_at')
+        return moment.isDate(dataVal) ? moment(dataVal).valueOf() : dataVal
       }
     },
     hooks: {
@@ -85,4 +66,10 @@ export default (sequelize, DataTypes) => {
       }
     }
   })
+
+  model.associate = ({Category}) => {
+
+  }
+
+  return model
 }

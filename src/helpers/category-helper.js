@@ -183,7 +183,28 @@ class CategoryHelper {
     const where = {code}
 
     return await models.Category.find({
-      where
+      where,
+      include: [
+        {
+          model: models.Category,
+          as: 'descendents',
+          hierarchy: true
+        },
+        {
+          model: models.Category,
+          as: 'parent'
+        }
+      ],
+      order: [
+        [
+          {
+            model: models.Category,
+            as: 'descendents'
+          },
+          'rank',
+          'ASC'
+        ]
+      ]
     })
   }
 
@@ -192,19 +213,14 @@ class CategoryHelper {
 
     const category = await models.Category.create(params)
 
-    // if (1 === 1) {
-    //   throw new Error('into throw new error, testing transaction.')
-    // }
-
-    return getCategoryById({category_id: category.category_id})
+    return await this.getCategoryById({category_id: category.category_id})
   }
 
   async updateCategory({params, existingCategory}) {
     const category = await existingCategory.update(params, {fields: existingCategory.attributes})
 
-    return await getCategoryById({category_id: category.category_id})
+    return await this.getCategoryById({category_id: category.category_id})
   }
 }
-
 
 export default new CategoryHelper()

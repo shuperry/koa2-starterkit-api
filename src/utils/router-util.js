@@ -16,7 +16,7 @@ class RouterUtil {
    if (true !== checkMsg) {
       ctx.body = {status: 400, error: checkMsg}
       return
-    }
+   }
    */
   checkRequireParam(param = {}, paramNames = [], messageNames = []) {
     let message = '', checkFlag = false
@@ -99,7 +99,7 @@ class RouterUtil {
   }
 
   /**
-   * utils funciton to check router params type, param type support: integer, float, double, string, array, object.
+   * utils funciton to check router params type, param type support: integer, float, double, string, array, object, date.
    Demo:
    // check param types.
    const checkParamTypeMsg = checkParamType(params, ['email', {name: 'mobile', type: 'integer'}], ['邮箱', '手机号码'])
@@ -140,6 +140,10 @@ class RouterUtil {
           if (!_.isArray(param[name])) {
             message += ((messageNames[i] || name) + '、')
           }
+        } else if (type === 'date') {
+          if (!isTimestamp(param[name])) {
+            message += ((messageNames[i] || name) + '、')
+          }
         } else if (typeof param[name] !== type) {
           message += ((messageNames[i] || name) + '、')
         }
@@ -163,7 +167,7 @@ class RouterUtil {
         if (_.isNumber(Number(params[key])) && !_.isNaN(Number(params[key]))
           && isTimestamp(Number(params[key]))) { // deal date type value.
           params[key] = Number(params[key])
-        } else if (_.trim(params[key]) === 'undefined' || _.trim(params[key]) === 'null') { // delete undefined or null value.
+        } else if (_.trim(params[key]) === 'undefined' || _.trim(params[key]) === 'null' || _.trim(params[key]) === 'NaN') { // delete un-normal value.
           delete params[key]
         }
       }

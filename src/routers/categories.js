@@ -9,7 +9,7 @@ import routerUtil from '../utils/router-util'
 const router = new Router()
 
 router.get('/categories/', async (ctx, next) => {
-  const params = ctx.query
+  const params = merge(ctx.query, ctx.params)
 
   // deal with date type & undefined or null value params.
   routerUtil.dealSpecialParam(params)
@@ -55,7 +55,7 @@ router.get('/categories/', async (ctx, next) => {
 })
 
 router.post('/categories/', async (ctx, next) => {
-  const params = ctx.request.body
+  const params = merge(ctx.request.body, ctx.req.body)
 
   // deal with date type & undefined or null value params.
   routerUtil.dealSpecialParam(params)
@@ -112,7 +112,7 @@ router.get('/categories/:category_id', async (ctx, next) => {
     ctx,
     params
   })
-  if (_.isPlainObject(result) && !result.flag) {
+  if (_.isPlainObject(result) && result.flag === false) {
     ctx.body = {
       status: (result.status_code || 400),
       error: (result.error_msg || messages[result.error_code])
@@ -131,7 +131,7 @@ router.get('/categories/:category_id', async (ctx, next) => {
  * router for update category.
  */
 router.patch('/categories/:category_id', async (ctx, next) => {
-  const params = merge(ctx.request.body, ctx.params)
+  const params = merge(ctx.request.body, ctx.req.body, ctx.params)
 
   // deal with date type & undefined or null value params.
   routerUtil.dealSpecialParam(params)
@@ -144,7 +144,7 @@ router.patch('/categories/:category_id', async (ctx, next) => {
     ctx,
     params
   })
-  if (_.isPlainObject(result) && !result.flag) {
+  if (_.isPlainObject(result) && result.flag === false) {
     ctx.body = {
       status: (result.status_code || 400),
       error: (result.error_msg || messages[result.error_code])

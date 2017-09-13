@@ -14,7 +14,7 @@ import logger from '../logger'
 const namespace = cls.createNamespace('g_api_cls')
 
 const Sequelize = hierachy(require('sequelize'))
-Sequelize.cls = namespace
+Sequelize.useCLS(namespace)
 
 const sequelize = new Sequelize(
   config.get('db:database'),
@@ -26,12 +26,15 @@ const sequelize = new Sequelize(
 const modelPath = path.join(__dirname, '..', 'models')
 
 export default async (callback) => {
+  let model
+
   fs.listTreeSync(modelPath)
     .reduce((prev, current) => prev.concat(current), [])
     .filter(filePath => fs.isFileSync(filePath) && path.extname(filePath) === '.js')
     .forEach(filePath => {
       logger.debug('importing model', filePath)
-      sequelize.import(filePath)
+      model = sequelize.import(filePath)
+      sequelize.models[model.name] = model
     })
 
   values(sequelize.models)
