@@ -11,21 +11,25 @@ export default (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING(100),
       defaultValue: '',
-      field: 'name'
+      field: 'name',
+      comment: '名称.'
     },
     code: {
       type: DataTypes.STRING(100),
       defaultValue: '',
-      field: 'code'
+      field: 'code',
+      comment: '唯一且规范命名的编码, 可在业务中使用.'
     },
     rank: {
       type: DataTypes.DOUBLE(11, 4),
-      field: 'rank'
+      field: 'rank',
+      comment: '当前所处层次的排序.'
     },
     remark: {
       type: DataTypes.STRING(4000),
       defaultValue: '',
-      field: 'remark'
+      field: 'remark',
+      comment: '备注.'
     },
     created_at: {
       type: DataTypes.DATE(6),
@@ -38,6 +42,7 @@ export default (sequelize, DataTypes) => {
   }, {
     timestamps: false,
     tableName: 'CRP_CATEGORY',
+    comment: '通用类别, 树形结构, parent_id 字段自关联.',
     hierarchy: {
       levelFieldName: 'level',
       foreignKey: 'parent_id',
