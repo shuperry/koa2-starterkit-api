@@ -47,7 +47,7 @@ class RouterUtil {
 
     if (message.length === 0) return true
 
-    // 去除多余的顿号.
+    // 去除最后多余的顿号.
     message = S(message).endsWith('、') ? message.substring(0, message.length - 1) : message
 
     return '缺失以下参数 (' + message + ')'
@@ -92,7 +92,7 @@ class RouterUtil {
 
     if (message.length === 0) return true
 
-    // 去除多余的顿号.
+    // 去除最后多余的顿号.
     message = S(message).endsWith('、') ? message.substring(0, message.length - 1) : message
 
     return '此接口不允许包含以下参数 (' + message + ')'
@@ -151,7 +151,7 @@ class RouterUtil {
 
     if (message.length === 0) return true
 
-    // 去除多余的顿号.
+    // 去除最后多余的顿号.
     message = S(message).endsWith('、') ? message.substring(0, message.length - 1) : message
 
     return '以下参数 (' + message + ') 数据类型不正确'
@@ -188,7 +188,7 @@ class RouterUtil {
       }
     })
 
-    // 去除多余的顿号.
+    // 去除最后多余的顿号.
     missing_message = S(missing_message).endsWith('、') ? missing_message.substring(0, missing_message.length - 1) : missing_message
     wronglength_message = S(wronglength_message).endsWith('、') ? wronglength_message.substring(0, wronglength_message.length - 1) : wronglength_message
 
