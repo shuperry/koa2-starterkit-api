@@ -174,7 +174,7 @@ class RouterUtil {
   }
 
   checkFileFieldParam(ctx, fileFieldNames = []) {
-    let wronglength_message = '', missing_message = ''
+    let wronglength_message = '', missing_message = '', message = ''
 
     fileFieldNames.forEach(fileFieldName => {
       if (!!ctx.req.files) {
@@ -188,12 +188,24 @@ class RouterUtil {
       }
     })
 
-    // 去除最后多余的顿号.
+    // 去除多余的顿号.
     missing_message = S(missing_message).endsWith('、') ? missing_message.substring(0, missing_message.length - 1) : missing_message
     wronglength_message = S(wronglength_message).endsWith('、') ? wronglength_message.substring(0, wronglength_message.length - 1) : wronglength_message
 
+    if (missing_message.length === 0 && wronglength_message.length === 0) return true
 
-    return '缺失以下附件参数 (' + missing_message + ') , 以下附件参数文件数量不正确 (' + wronglength_message + ')'
+    if (missing_message.length > 0) {
+      message += '缺失以下附件参数 (' + missing_message + ')'
+    }
+
+    if (wronglength_message.length > 0) {
+      if (message.length > 0) {
+        message += '、'
+      }
+      message += '以下附件参数文件数量不正确 (' + wronglength_message + ')'
+    }
+
+    return message
   }
 }
 
