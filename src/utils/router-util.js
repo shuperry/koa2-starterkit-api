@@ -23,7 +23,7 @@ class RouterUtil {
 
     paramNames.forEach((paramName, i) => {
       if (typeof paramName === 'string') {
-        if (!(!!param[paramName] && param[paramName] !== 'undefined' && param[paramName] !== 'null')) {
+        if (!(!_.isUndefined(param[paramName]) && param[paramName] !== 'undefined' && param[paramName] !== 'null')) {
           message += ((messageNames[i] || paramName) + '、')
         }
       } else if (typeof paramName === 'object') {
@@ -68,7 +68,7 @@ class RouterUtil {
 
     paramNames.forEach((paramName, i) => {
       if (typeof paramName === 'string') {
-        if ((!!param[paramName] && param[paramName] !== 'undefined' && param[paramName] !== 'null')) {
+        if ((!_.isUndefined(param[paramName]) && param[paramName] !== 'undefined' && param[paramName] !== 'null')) {
           message += ((messageNames[i] || paramName) + '、')
         }
       } else if (typeof paramName === 'object') {
@@ -171,6 +171,29 @@ class RouterUtil {
         }
       }
     })
+  }
+
+  checkFileFieldParam(ctx, fileFieldNames = []) {
+    let wronglength_message = '', missing_message = ''
+
+    fileFieldNames.forEach(fileFieldName => {
+      if (!!ctx.req.files) {
+        if (_.isUndefined(ctx.req.files[fileFieldName])) {
+          missing_message += (fileFieldName + '、')
+        } else if (ctx.req.files[fileFieldName].length === 1) {
+          wronglength_message += (fileFieldName + '、')
+        }
+      } else {
+        missing_message += (fileFieldName + '、')
+      }
+    })
+
+    // 去除多余的顿号.
+    missing_message = S(missing_message).endsWith('、') ? missing_message.substring(0, missing_message.length - 1) : missing_message
+    wronglength_message = S(wronglength_message).endsWith('、') ? wronglength_message.substring(0, wronglength_message.length - 1) : wronglength_message
+
+
+    return '缺失以下附件参数 (' + missing_message + ') , 以下附件参数文件数量不正确 (' + wronglength_message + ')'
   }
 }
 
