@@ -117,6 +117,7 @@ class RouterUtil {
         type = paramName.type
       } else if (typeof paramName === 'string') {
         name = paramName
+        type = 'string'
       }
 
       // 字段类型默认值为字符串.
