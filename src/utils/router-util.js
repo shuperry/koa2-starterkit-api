@@ -174,14 +174,52 @@ class RouterUtil {
     })
   }
 
-  checkFileFieldParam(ctx, fileFieldNames = []) {
-    let wronglength_message = '', missing_message = '', message = ''
+  /**
+   * 验证文件参数, 默认支持验证多文件上传, 如需验证单文件, 请参考以下 demo 代码.
 
-    fileFieldNames.forEach(fileFieldName => {
-      if (!!ctx.req.files) {
+   Demo:
+   // check param types.
+   const checkFileParamMsg = checkFileFieldParam(params, [
+   {
+     fieldName: 'file',
+     required: false,
+     multi: false
+   }
+   ])
+   if (true !== checkParamTypeMsg) {
+     ctx.body = {status: 400, error: checkParamTypeMsg}
+     return
+   }
+
+   * @param ctx
+   * @param fileFields
+   * @returns {*}
+   */
+  checkFileFieldParam(ctx, fileFields = []) {
+    let wronglength_message = '', missing_message = '', message = '',
+      fileFieldName, multi, required
+
+    fileFields.forEach(fileField => {
+      if (typeof fileField === 'object') {
+        fileFieldName = fileField.fieldName
+        multi = fileField.multi
+        required = fileField.required
+      } else if (typeof fileField === 'string') {
+        fileFieldName = fileField.name
+        multi = true
+        required = true
+      }
+
+      // 默认支持多文件.
+      if (_.isUndefined(multi)) multi = true
+
+      // 默认文件必填.
+      if (_.isUndefined(required)) required = true
+
+      if (required && !!ctx.req.files) {
         if (_.isUndefined(ctx.req.files[fileFieldName])) {
           missing_message += (fileFieldName + '、')
-        } else if (ctx.req.files[fileFieldName].length === 1) {
+        } else if (multi === false && ctx.req.files[fileFieldName].length !== 1) {
           wronglength_message += (fileFieldName + '、')
         }
       } else {
