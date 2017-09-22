@@ -3438,6 +3438,12 @@ v8flags@^2.0.10:
   dependencies:
     user-home "^1.1.1"
 
+validate.io-absolute-time@^1.0.3:
+  version "1.0.3"
+  resolved "http://registry.npm.taobao.org/validate.io-absolute-time/download/validate.io-absolute-time-1.0.3.tgz#416ba44ce695a085a453ffdd1d048d85417fe74c"
+  dependencies:
+    validate.io-string "^1.0.1"
+
 validate.io-json@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/validate.io-json/download/validate.io-json-1.0.0.tgz#cbd9b2e5b56245e0c8734be9acb6243263d6a9c5"
@@ -3445,6 +3451,10 @@ validate.io-json@^1.0.0:
 validate.io-number@^1.0.2:
   version "1.0.3"
   resolved "http://registry.npm.taobao.org/validate.io-number/download/validate.io-number-1.0.3.tgz#f63ffeda248bf28a67a8d48e0e3b461a1665baf8"
+
+validate.io-string@^1.0.1:
+  version "1.0.2"
+  resolved "http://registry.npm.taobao.org/validate.io-string/download/validate.io-string-1.0.2.tgz#babf3a528b28e4b9e8017e3281fc76001ae6dc2f"
 
 validate.io-timestamp@^1.0.2:
   version "1.0.2"

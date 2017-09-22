@@ -2,6 +2,7 @@ import _ from 'lodash'
 import keys from 'lodash.keys'
 import S from 'string'
 import isTimestamp from 'validate.io-timestamp'
+import isAbsoluteTime from 'validate.io-absolute-time'
 import isJSON from 'validate.io-json'
 
 class RouterUtil {
@@ -140,8 +141,12 @@ class RouterUtil {
           if (!_.isArray(param[name])) {
             message += ((messageNames[i] || name) + '、')
           }
-        } else if (type === 'date') {
-          if (!isTimestamp(param[name])) {
+        } else if (type === 'date') { // 支持 2014/07/14、2014/07/14 9:23、2014/07/18-9:34:42, 不支持 2014-07-14 9:34:42.
+          if (!isTimestamp(param[name]) && !isAbsoluteTime(param[name])) {
+            message += ((messageNames[i] || name) + '、')
+          }
+        } else if (type === 'string') {
+          if (_.toString(param[name]).length === 0) {
             message += ((messageNames[i] || name) + '、')
           }
         } else if (typeof param[name] !== type) {
