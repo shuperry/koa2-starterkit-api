@@ -146,7 +146,7 @@ class RouterUtil {
             message += ((messageNames[i] || name) + '、')
           }
         } else if (type === 'string') {
-          if (_.toString(param[name]).length === 0) {
+          if (_.toString(param[name]).length < 0) {
             message += ((messageNames[i] || name) + '、')
           }
         } else if (typeof param[name] !== type) {
@@ -210,7 +210,7 @@ class RouterUtil {
         multi = fileField.multi
         required = fileField.required
       } else if (typeof fileField === 'string') {
-        fileFieldName = fileField.name
+        fileFieldName = fileField
         multi = true
         required = true
       }
