@@ -145,11 +145,7 @@ class RouterUtil {
           if (!isTimestamp(param[name]) && !isAbsoluteTime(param[name])) {
             message += ((messageNames[i] || name) + '、')
           }
-        } else if (type === 'string') {
-          if (_.toString(param[name]).length < 0) {
-            message += ((messageNames[i] || name) + '、')
-          }
-        } else if (typeof param[name] !== type) {
+        } else if (type !== 'string' && typeof param[name] !== type) {
           message += ((messageNames[i] || name) + '、')
         }
       }

@@ -1,8 +1,9 @@
+import fs from 'fs'
 import path from 'path'
 
 import keys from 'lodash.keys'
 import values from 'lodash.values'
-import fs from 'fs-plus'
+import fsPlus from 'fs-plus'
 import _ from 'lodash'
 import S from 'string'
 import async from 'async'
@@ -52,13 +53,13 @@ const testSth = async (client) => {
   //   parent_id: parent_1.category_id
   // })
 
-  // testing send email.
-  const sendMailResult = await MailUtil.sendMail({
-    receiver: 'cn.shperry@gmail.com',
-    subject: 'Test sending email with nodeJS',
-    text: 'Hello! This is a test email sent with nodeJS.'
-  })
-  console.log('sendMailResult = ', sendMailResult)
+  // // testing send email.
+  // const sendMailResult = await MailUtil.sendMail({
+  //   receiver: 'cn.shperry@gmail.com',
+  //   subject: 'Test sending email with nodeJS',
+  //   text: 'Hello! This is a test email sent with nodeJS.'
+  // })
+  // console.log('sendMailResult = ', sendMailResult)
 
   // // testing write data to csv file.
   // const fields = ['field3', 'field4', 'field1', 'field2']
@@ -72,25 +73,36 @@ const testSth = async (client) => {
 
   // console.log('csv = ', csv)
 
-  // fs.writeFileSync('/Users/perry/Desktop/test.csv', '\uFEFF' + csv)
+  // fsPlus.writeFileSync('/Users/perry/Desktop/test.csv', '\uFEFF' + csv)
 }
 
-const sendRequest = async ({urlPath, method = 'get', params = {}, headers, queryString}) => {
+const sendRequest = async ({urlPath, method = 'get', params = {}, multipart = false, headers, queryString}) => {
   const protocol = 'http'
   const apiHost = '127.0.0.1'
-  const apiPort = '7443'
+  const apiPort = '5444'
 
   let res
 
   switch (method) {
     case 'post':
-      res = await request.postAsync({
-        url: !!queryString ? `${protocol}://${apiHost}:${apiPort}${urlPath}?${qs.stringify(queryString)}` :
-          `${protocol}://${apiHost}:${apiPort}${urlPath}`,
-        body: params,
-        headers,
-        json: true
-      })
+
+      if (multipart) {
+        res = await request.postAsync({
+          url: !!queryString ? `${protocol}://${apiHost}:${apiPort}${urlPath}?${qs.stringify(queryString)}` :
+            `${protocol}://${apiHost}:${apiPort}${urlPath}`,
+          formData: params,
+          headers,
+        })
+      } else {
+        res = await request.postAsync({
+          url: !!queryString ? `${protocol}://${apiHost}:${apiPort}${urlPath}?${qs.stringify(queryString)}` :
+            `${protocol}://${apiHost}:${apiPort}${urlPath}`,
+          body: params,
+          headers,
+          json: true
+        })
+      }
+
       break
     case 'get':
       res = await request.getAsync({
@@ -133,42 +145,7 @@ const testRedis = async (client) => {
   // await client.flushdb()
 }
 
-class Man{
-  constructor(def = 2, atk = 3, hp = 3){
-    this.init(def, atk, hp)
-  }
-
-  @decorateArmour
-  @time
-  init(def, atk, hp){
-    console.log('into init with def =', def, ' atk = ', atk, ' hp = ', hp)
-
-    this.def = def // 防御值
-    this.atk = atk  // 攻击力
-    this.hp = hp  // 血量
-  }
-
-  toString(){
-    return `防御力:${this.def}, 攻击力:${this.atk}, 血量:${this.hp}`
-  }
-}
-
 export default async () => {
-  const tony = new Man(1, 2, 3)
-  const rodi = new Man(4, 5, 6)
-
-  console.log(`tony 当前状态 ===> ${tony}`)
-  console.log(`rodi 当前状态 ===> ${rodi}`)
-
-  const propNames = Object.getOwnPropertyNames(Object.getPrototypeOf(tony))
-  propNames.forEach(propName => {
-    console.log('propName = ', propName)
-    console.log('prop = ', tony[propName])
-    console.log('prop is function = ', _.isFunction(tony[propName]))
-  })
-
-  console.log('functions =', Object.getOwnPropertyNames(Object.getPrototypeOf(tony)))
-
   let categoriesCodeMap = {},
     categoriesIdMap = {},
     categoryJson = {}
@@ -191,7 +168,18 @@ export default async () => {
 
   // await testRedis(client)
 
-  await testSth(client)
+  // await testSth(client)
+
+  // await sendRequest({
+  //   urlPath: '/api/files',
+  //   method: 'post',
+  //   multipart: true,
+  //   params: {
+  //     filefield: 'file',
+  //     file: fs.createReadStream('/Users/perry/Desktop/test.xlsx'),
+  //     parent_id: 25
+  //   }
+  // })
 
   // disconnect client after set static data.
   client.disconnect()
