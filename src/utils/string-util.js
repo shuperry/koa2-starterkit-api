@@ -13,10 +13,14 @@ class StringUtil {
   }
 
   static isBlank(sth) {
+    if (sth === 'null' || sth === 'undefined' || sth === 'NaN') return true
+
     return _.isEmpty(_.toString(sth))
   }
 
   static isNotBlank(sth) {
+    if (sth === 'null' || sth === 'undefined' || sth === 'NaN') return false
+
     return !_.isEmpty(_.toString(sth))
   }
 }
