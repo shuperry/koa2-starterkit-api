@@ -164,10 +164,12 @@ class RouterUtil {
       if (!!ctx && !!ctx.request && !!ctx.request['header'] && !!ctx.request['header']['content-type'] &&
         S(ctx.request['header']['content-type']).startsWith('multipart/form-data') && isJSON(params[key])) {
         params[key] = JSON.parse(params[key])
-      } else if (_.isString(params[key]) && !isJSON(params[key])) {
-        if (_.isNumber(Number(params[key])) && !_.isNaN(Number(params[key]))
-          && isTimestamp(Number(params[key]))) { // deal date type value.
-          params[key] = Number(params[key])
+      }
+
+      if (_.isString(params[key]) && !isJSON(params[key])) {
+        if (_.isNumber(_.toNumber(params[key])) && !_.isNaN(_.toNumber(params[key]))
+          && isTimestamp(_.toNumber(params[key]))) { // deal date type value.
+          params[key] = _.toNumber(params[key])
         } else if (_.trim(params[key]) === 'undefined' || _.trim(params[key]) === 'null' || _.trim(params[key]) === 'NaN') { // delete un-normal value.
           delete params[key]
         }

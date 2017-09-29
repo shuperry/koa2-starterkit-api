@@ -22,13 +22,13 @@ import config from '../config'
 import logger from '../logger'
 
 import createRedisClient from './redis-client'
-
-import categoryHelper from '../helpers/category-helper'
-
 import MailUtil from '../utils/mail-util'
+import RedisUtil from '../utils/redis-util'
 
 import { time } from 'core-decorators'
 import {decorateArmour} from '../decorators/service-decorator'
+
+import categoryHelper from '../helpers/category-helper'
 
 Promise.promisifyAll(request)
 
@@ -136,7 +136,7 @@ const testRedis = async (client) => {
   // ]).exec()
   // console.log('pipeline results 2: ', results2)
 
-  // console.log(await redisUtil.store(client, 'case_', '1', {a: 'a', case_id: '1'}))
+  // console.log(await RedisUtil.store(client, 'case_', '1', {a: 'a', case_id: '1'}))
   // console.log(await redisUtil.store(client, 'case_', '2', {b: 'b', case_id: '2'}))
   // console.log(await redisUtil.get(client, 'case_', '2'))
   // console.log(await redisUtil.multiGet(client, 'case_', ['2', '3']))

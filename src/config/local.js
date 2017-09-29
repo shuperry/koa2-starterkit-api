@@ -16,7 +16,8 @@ export default {
       connectionName: 'starterkit-redis-local',
       family: '4',
       db: 1, // this db will be used.
-      showFriendlyErrorStack: true
+      showFriendlyErrorStack: true,
+      password: 'crP@ssw0rd'
     }
   },
   auth: {
