@@ -32,7 +32,7 @@ export default async (callback) => {
     .reduce((prev, current) => prev.concat(current), [])
     .filter(filePath => fs.isFileSync(filePath) && path.extname(filePath) === '.js')
     .forEach(filePath => {
-      logger.debug('importing model', filePath)
+      logger.info(`loading model: ${filePath.substring(modelPath.length + 1, filePath.length - 3)}`)
       model = sequelize.import(filePath)
       sequelize.models[model.name] = model
     })

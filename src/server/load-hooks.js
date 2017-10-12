@@ -19,9 +19,14 @@ const hooks = [
   // 'static-service'
 ]
 
+const hookPath = path.join(__dirname, 'hooks')
+
 export default async ({app}) => {
   hooks
-    .map(hookName => path.resolve(__dirname, 'hooks', hookName))
-    .map(fileName => require(fileName).default)
+    .map(hookName => path.join(hookPath, hookName))
+    .map(fileName => {
+      logger.info(`loading hook: ${path.basename(fileName)}`)
+      return require(fileName).default
+    })
     .forEach(hook => hook(app))
 }

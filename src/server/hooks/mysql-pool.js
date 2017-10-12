@@ -1,17 +1,12 @@
-import path from 'path'
-
 import {Pool} from 'generic-pool'
 import Debug from 'debug'
 import mysql from 'mysql'
 
 import config from '../../config'
-import logger from '../../logger'
 
 const debug = new Debug('mysql-pool')
 
 export default (app) => {
-  logger.info('loading hook %s...', path.basename(__filename, '.js'))
-
   const mysqlPool = new Pool({
     name: 'mysql',
     create: cb => {

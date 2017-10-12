@@ -17,8 +17,6 @@ import logger from '../../logger'
 Promise.promisifyAll(jwt)
 
 export default (app) => {
-  logger.info('loading hook %s...', path.basename(__filename, '.js'))
-
   const router = new Router({prefix: config.get('prefix')})
   const routerRootPath = path.join(__dirname, '..', '..', 'routers/')
 
@@ -185,7 +183,7 @@ export default (app) => {
     .filter(filePath => fs.isFileSync(filePath) && path.extname(filePath) === '.js')
     .map(name => name.substring(routerRootPath.length, name.length - 3)) // 3 is ext string '.js'.length.
     .forEach(name => {
-      logger.info(`mount router: /${name}`)
+      logger.info(`mounting router: /${name}`)
       router.use('', require(`${routerRootPath}/${name}`).default.routes())
     })
 
