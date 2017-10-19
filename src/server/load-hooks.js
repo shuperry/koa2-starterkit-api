@@ -24,9 +24,9 @@ const hookPath = path.join(__dirname, 'hooks')
 export default async ({app}) => {
   hooks
     .map(hookName => path.join(hookPath, hookName))
-    .map(fileName => {
-      logger.info(`loading hook: ${path.basename(fileName)}`)
-      return require(fileName).default
+    .map(filePath => {
+      logger.info(`loading hook: ${path.basename(filePath)}`)
+      return require(filePath).default
     })
     .forEach(hook => hook(app))
 }
