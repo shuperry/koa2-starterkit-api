@@ -3,6 +3,8 @@
  */
 import path from 'path'
 
+import logger from '../logger'
+
 const hooks = [
   // 'response-time',
   // 'helmet',
