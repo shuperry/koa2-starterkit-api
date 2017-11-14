@@ -2303,7 +2303,7 @@ lodash@^3.6.0:
   version "3.10.1"
   resolved "http://registry.npm.taobao.org/lodash/download/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.0.0, lodash@^4.14.0, lodash@^4.17.1, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.8.2:
+lodash@^4.0.0, lodash@^4.14.0, lodash@^4.16.0, lodash@^4.17.1, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.8.2:
   version "4.17.4"
   resolved "http://registry.npm.taobao.org/lodash/download/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -3052,11 +3052,11 @@ seq-queue@0.0.5:
   version "0.0.5"
   resolved "http://registry.npm.taobao.org/seq-queue/download/seq-queue-0.0.5.tgz#d56812e1c017a6e4e7c3e3a37a1da6d78dd3c93e"
 
-sequelize-hierarchy@^1.3.1:
-  version "1.3.1"
-  resolved "http://registry.npm.taobao.org/sequelize-hierarchy/download/sequelize-hierarchy-1.3.1.tgz#64fa9bae8ad07286dc797fe204aaaea58d8fd4e5"
+sequelize-hierarchy@1.2.0:
+  version "1.2.0"
+  resolved "http://registry.npm.taobao.org/sequelize-hierarchy/download/sequelize-hierarchy-1.2.0.tgz#43bea0d1048071c6960c3cb49f3a92d27086b731"
   dependencies:
-    lodash "^4.17.4"
+    lodash "^4.16.0"
     semver-select "^1.1.0"
 
 sequelize@^4.7.5:
