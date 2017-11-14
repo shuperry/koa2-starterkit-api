@@ -188,6 +188,17 @@ export default async () => {
 
   // await testSth(client)
 
+  // await sendRequest({
+  //   urlPath: '/api/files',
+  //   method: 'post',
+  //   multipart: true,
+  //   params: {
+  //     filefield: 'file',
+  //     file: fs.createReadStream('/Users/perry/Desktop/test.xlsx'),
+  //     parent_id: 25
+  //   }
+  // })
+
   await sendRequest({
     urlPath: '/api/lawfirms/1',
     method: 'patch',
