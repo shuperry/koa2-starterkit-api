@@ -41,8 +41,6 @@ export default async (callback) => {
     .filter(model => isFunction(model.associate))
     .forEach(model => model.associate(sequelize.models))
 
-  // // rebuild hierarchy data for Object and Category model.
-  // await sequelize.models.Object.rebuildHierarchy()
   // await sequelize.models.Category.rebuildHierarchy()
 
   // 初始化不存在的数据库表.
