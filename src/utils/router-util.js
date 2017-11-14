@@ -167,8 +167,7 @@ class RouterUtil {
       }
 
       if (_.isString(params[key]) && !isJSON(params[key])) {
-        if (_.isNumber(_.toNumber(params[key])) && !_.isNaN(_.toNumber(params[key]))
-          && isTimestamp(_.toNumber(params[key]))) { // deal date type value.
+        if (_.isNumber(_.toNumber(params[key])) && !_.isNaN(_.toNumber(params[key]))) {
           params[key] = _.toNumber(params[key])
         } else if (_.trim(params[key]) === 'undefined' || _.trim(params[key]) === 'null' || _.trim(params[key]) === 'NaN') { // delete un-normal value.
           delete params[key]
