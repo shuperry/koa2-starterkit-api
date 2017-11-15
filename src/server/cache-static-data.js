@@ -199,45 +199,45 @@ export default async () => {
   //   }
   // })
 
-  await sendRequest({
-    urlPath: '/api/lawfirms/1',
-    method: 'patch',
-    multipart: true,
-    params: {
-      filefield: 'files',
-      files: fs.createReadStream('/Users/perry/Desktop/test.xlsx'),
-      applicant_institution: 'applicant_institution',
-      name: 'name_1',
-      address: 'address_1',
-      post_code: 'post_code',
-      firm_contact_number: 'firm_contact_number',
-      website: 'website',
-      fax: 'fax',
-      established_at: Number(new Date()),
-      registered_capital: 12131313,
-      legal_person: 'legal_person',
-      legal_person_contact_number: 'legal_person_contact_number',
-      legal_person_email: 'legal_person_email',
-      // business_line: 'business_line',
-      been_arbitrator_situation: 'been_arbitrator_situation',
-      industry_awards: 'industry_awards',
-      sub_firm_amount_city: 'sub_firm_amount_city',
-      is_annual_survey_qualified: 1,
-      has_serverd_crc_company: 'has_serverd_crc_company',
-      lawyer_name: 'lawyer_name',
-      lawyer_busi_license_number: 'lawyer_busi_license_number',
-      // lawyer_skilful_business_line: 'lawyer_skilful_business_line',
-      lawyer_contact_number: 'lawyer_contact_number',
-      lawyer_punish: 'lawyer_punish',
-      remark: 'remark',
-      lawfirm_punish: JSON.stringify([
-        {
-          title: '惩罚1概述',
-          body: '惩罚1详细描述'
-        }
-      ])
-    }
-  })
+  // await sendRequest({
+  //   urlPath: '/api/lawfirms/1',
+  //   method: 'patch',
+  //   multipart: true,
+  //   params: {
+  //     filefield: 'files',
+  //     files: fs.createReadStream('/Users/perry/Desktop/test.xlsx'),
+  //     applicant_institution: 'applicant_institution',
+  //     name: 'name_1',
+  //     address: 'address_1',
+  //     post_code: 'post_code',
+  //     firm_contact_number: 'firm_contact_number',
+  //     website: 'website',
+  //     fax: 'fax',
+  //     established_at: Number(new Date()),
+  //     registered_capital: 12131313,
+  //     legal_person: 'legal_person',
+  //     legal_person_contact_number: 'legal_person_contact_number',
+  //     legal_person_email: 'legal_person_email',
+  //     // business_line: 'business_line',
+  //     been_arbitrator_situation: 'been_arbitrator_situation',
+  //     industry_awards: 'industry_awards',
+  //     sub_firm_amount_city: 'sub_firm_amount_city',
+  //     is_annual_survey_qualified: 1,
+  //     has_serverd_crc_company: 'has_serverd_crc_company',
+  //     lawyer_name: 'lawyer_name',
+  //     lawyer_busi_license_number: 'lawyer_busi_license_number',
+  //     // lawyer_skilful_business_line: 'lawyer_skilful_business_line',
+  //     lawyer_contact_number: 'lawyer_contact_number',
+  //     lawyer_punish: 'lawyer_punish',
+  //     remark: 'remark',
+  //     lawfirm_punish: JSON.stringify([
+  //       {
+  //         title: '惩罚1概述',
+  //         body: '惩罚1详细描述'
+  //       }
+  //     ])
+  //   }
+  // })
 
   // disconnect client after set static data.
   client.disconnect()
