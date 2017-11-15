@@ -217,7 +217,7 @@ class CategoryHelper {
   }
 
   async updateCategory({params, existingCategory}) {
-    const category = await existingCategory.update(params, {fields: existingCategory.attributes})
+    const category = await existingCategory.update(params)
 
     return await this.getCategoryById({category_id: category.category_id})
   }
