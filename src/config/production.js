@@ -4,7 +4,7 @@ export default {
   log: {
     level: 'error'
   },
-  uploadPath: '/apps/law/attachments/starterkit-api',
+  uploadPath: '/apps/crp/attachments/starterkit-api',
   redisServer: {
     keyPrefix: 'starterkit_',
     name: 'starterkit-redis',
