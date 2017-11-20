@@ -4,6 +4,7 @@ import S from 'string'
 import isTimestamp from 'validate.io-timestamp'
 import isAbsoluteTime from 'validate.io-absolute-time'
 import isJSON from 'validate.io-json'
+import email from 'email-address'
 
 class RouterUtil {
   constructor() {
@@ -100,7 +101,7 @@ class RouterUtil {
   }
 
   /**
-   * utils funciton to check router params type, param type support: integer, float, double, string, array, object, date.
+   * utils funciton to check router params type, param type support: integer, float, double, string, array, object, date, email.
    Demo:
    // check param types.
    const checkParamTypeMsg = checkParamType(params, ['email', {name: 'mobile', type: 'integer'}], ['邮箱', '手机号码'])
@@ -139,6 +140,10 @@ class RouterUtil {
           }
         } else if (type === 'array') {
           if (!_.isArray(param[name])) {
+            message += ((messageNames[i] || name) + '、')
+          }
+        } else if (type === 'email') {
+          if (!email.isValid(param[name])) {
             message += ((messageNames[i] || name) + '、')
           }
         } else if (type === 'date') { // 支持 2014/07/14、2014/07/14 9:23、2014/07/18-9:34:42, 不支持 2014-07-14 9:34:42.

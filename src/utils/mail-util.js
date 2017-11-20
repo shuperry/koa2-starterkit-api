@@ -58,13 +58,13 @@ class MailUtil {
               html
             }))
 
-            logger.info('邮件发送成功 receiver = ', receiver)
+            logger.info('邮件发送成功 receiver =', receiver)
 
             successful.push(receiver)
 
             cb(null)
           } catch (err) {
-            logger.error('邮件发送失败 err = ', err)
+            logger.error('邮件发送失败 err =', err)
 
             cb('failed.')
           }
