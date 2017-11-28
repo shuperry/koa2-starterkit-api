@@ -200,15 +200,16 @@ export default async () => {
   // })
 
   // await sendRequest({
-  //   urlPath: '/api/lawfirms/1',
-  //   method: 'patch',
+  //   urlPath: '/api/lawyers',
+  //   method: 'post',
   //   multipart: true,
   //   params: {
-  //     filefield: 'files',
-  //     files: fs.createReadStream('/Users/perry/Desktop/test.xlsx'),
+  //     // filefield: 'files',
+  //     // files: fs.createReadStream('/Users/perry/Desktop/test.xlsx'),
+  //
   //     applicant_institution: 'applicant_institution',
-  //     name: 'name_1',
-  //     address: 'address_1',
+  //     name: 'name',
+  //     address: 'address',
   //     post_code: 'post_code',
   //     firm_contact_number: 'firm_contact_number',
   //     website: 'website',
