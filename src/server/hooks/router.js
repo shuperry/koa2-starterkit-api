@@ -100,56 +100,56 @@ export default (app) => {
       }
 
       // return await jwt({secret: config.get('auth:jwt:secretKey'), cookie: config.get('auth:cookie:token'), passthrough: true})(ctx, next)
-    }
+    } else {
+      // only urls in config file need check authority.
+      const matchedAuthUrls = []
+      config.get('auth:urls')
+        .filter(urlPath => new RegExp(`^${urlPath}.*`).test(ctx.url))
+        .forEach(urlPath => matchedAuthUrls.push(urlPath))
 
-    // only urls in config file need check authority.
-    const matchedAuthUrls = []
-    config.get('auth:urls')
-      .filter(urlPath => new RegExp(`^${urlPath}.*`).test(ctx.url))
-      .forEach(urlPath => matchedAuthUrls.push(urlPath))
+      if (matchedAuthUrls.length > 0) {
+        if (!!ctx.header.authorization && ctx.header.authorization !== 'undefined' &&
+          ctx.header.authorization !== 'null') {
+          let user
+          try {
+            user = await jwt.verifyAsync(ctx.header.authorization, config.get('auth:jwt:secretKey'), {})
+            ctx.state['user'] = user
+          } catch (e) {
+            return ctx.throw(401, 'Invalid token...')
+          }
 
-    if (matchedAuthUrls.length > 0) {
-      if (!!ctx.header.authorization && ctx.header.authorization !== 'undefined' &&
-        ctx.header.authorization !== 'null') {
-        let user
-        try {
-          user = await jwt.verifyAsync(ctx.header.authorization, config.get('auth:jwt:secretKey'), {})
-          ctx.state['user'] = user
-        } catch (e) {
+          logger.info('current logged in user =', {
+            sid: user.sid,
+            display_name: user.display_name,
+            email: user.email
+          })
+
+          return await next()
+        } else {
           return ctx.throw(401, 'Invalid token...')
         }
 
-        logger.info('current logged in user =', {
-          sid: user.sid,
-          display_name: user.display_name,
-          email: user.email
-        })
+        // return await jwt({secret: config.get('auth:jwt:secretKey'), cookie: config.get('auth:cookie:token')})(ctx, next)
+      } else { // if urls not in urls and passUrls, but has authorization in header, we check authority and passthrough.
+        if (!!ctx.header.authorization && ctx.header.authorization !== 'undefined' &&
+          ctx.header.authorization !== 'null') {
+          let user
+          try {
+            user = await jwt.verifyAsync(ctx.header.authorization, config.get('auth:jwt:secretKey'), {passthrough: true})
+            ctx.state['user'] = user
+          } catch (e) {
+            return ctx.throw(401, 'Invalid token...')
+          }
+
+          logger.info('current logged in user =', {
+            sid: user.sid,
+            display_name: user.display_name,
+            email: user.email
+          })
+        }
 
         return await next()
-      } else {
-        return ctx.throw(401, 'Invalid token...')
       }
-
-      // return await jwt({secret: config.get('auth:jwt:secretKey'), cookie: config.get('auth:cookie:token')})(ctx, next)
-    } else { // if urls not in urls and passUrls, but has authorization in header, we check authority and passthrough.
-      if (!!ctx.header.authorization && ctx.header.authorization !== 'undefined' &&
-        ctx.header.authorization !== 'null') {
-        let user
-        try {
-          user = await jwt.verifyAsync(ctx.header.authorization, config.get('auth:jwt:secretKey'), {passthrough: true})
-          ctx.state['user'] = user
-        } catch (e) {
-          return ctx.throw(401, 'Invalid token...')
-        }
-
-        logger.info('current logged in user =', {
-          sid: user.sid,
-          display_name: user.display_name,
-          email: user.email
-        })
-      }
-
-      return await next()
     }
   })
 
