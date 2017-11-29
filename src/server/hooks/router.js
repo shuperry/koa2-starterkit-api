@@ -82,7 +82,10 @@ export default (app) => {
         ctx.header.authorization !== 'null') {
         let user
         try {
-          user = await jwt.verifyAsync(ctx.header.authorization, config.get('auth:jwt:secretKey'), {passthrough: true})
+          user = await jwt.verifyAsync(ctx.header.authorization, config.get('auth:jwt:secretKey'), {
+            passthrough: true,
+            ...(config.get('auth:jwt:options'))
+          })
           ctx.state['user'] = user
         } catch (e) {
           return ctx.throw(401, 'Invalid token...')
@@ -112,7 +115,7 @@ export default (app) => {
           ctx.header.authorization !== 'null') {
           let user
           try {
-            user = await jwt.verifyAsync(ctx.header.authorization, config.get('auth:jwt:secretKey'), {})
+            user = await jwt.verifyAsync(ctx.header.authorization, config.get('auth:jwt:secretKey'), config.get('auth:jwt:options'))
             ctx.state['user'] = user
           } catch (e) {
             return ctx.throw(401, 'Invalid token...')
@@ -135,7 +138,10 @@ export default (app) => {
           ctx.header.authorization !== 'null') {
           let user
           try {
-            user = await jwt.verifyAsync(ctx.header.authorization, config.get('auth:jwt:secretKey'), {passthrough: true})
+            user = await jwt.verifyAsync(ctx.header.authorization, config.get('auth:jwt:secretKey'), {
+              passthrough: true,
+              ...(config.get('auth:jwt:options'))
+            })
             ctx.state['user'] = user
           } catch (e) {
             return ctx.throw(401, 'Invalid token...')
