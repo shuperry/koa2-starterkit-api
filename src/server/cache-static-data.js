@@ -17,6 +17,7 @@ import base64Img from 'base64-img'
 
 import Promise from 'bluebird'
 import request from 'request'
+import download from 'download'
 
 import config from '../config'
 import logger from '../logger'
@@ -30,6 +31,9 @@ import {decorateArmour} from '../decorators/service-decorator'
 
 import categoryHelper from '../helpers/category-helper'
 
+import StoreGlobalDataUtil from './store-global-data'
+
+Promise.promisifyAll(async)
 Promise.promisifyAll(request)
 
 const testSth = async (client) => {
@@ -78,8 +82,8 @@ const testSth = async (client) => {
 
 const sendRequest = async ({urlPath, method = 'get', params = {}, multipart = false, headers, queryString}) => {
   const protocol = 'http'
-  const apiHost = '127.0.0.1'
-  const apiPort = '7443'
+  const apiHost = '10.59.6.223'
+  const apiPort = '7002'
 
   let res
 
@@ -164,22 +168,7 @@ const testRedis = async (client) => {
 }
 
 export default async () => {
-  let categoriesCodeMap = {},
-    categoriesIdMap = {},
-    categoryJson = {}
-
-  const categories = await categoryHelper.getSimpleCategories({})
-  categories.forEach(category => {
-    categoryJson = JSON.parse(JSON.stringify(category))
-
-    if (!_.isEmpty(categoryJson.code)) {
-      categoriesCodeMap[categoryJson.code] = categoryJson
-    }
-    categoriesIdMap[categoryJson.category_id] = categoryJson
-  })
-
-  g_api.categoriesCodeMap = categoriesCodeMap
-  g_api.categoriesIdMap = categoriesIdMap
+  await StoreGlobalDataUtil.storeGloabalCategories()
 
   // create new redis client.
   const client = await createRedisClient()
@@ -188,57 +177,13 @@ export default async () => {
 
   // await testSth(client)
 
-  // await sendRequest({
-  //   urlPath: '/api/files',
-  //   method: 'post',
-  //   multipart: true,
-  //   params: {
-  //     filefield: 'file',
-  //     file: fs.createReadStream('/Users/perry/Desktop/test.xlsx'),
-  //     parent_id: 25
-  //   }
+  // console.log('before download')
+
+  // download('http://gkstorage.oss-cn-hangzhou.aliyuncs.com/11/116b199c9a458e2986ac34d0e998b7581c94014d.dat?response-content-disposition=attachment%3B%20filename%3D%22aaabbcc.jpg%22%3B%20filename%2A%3Dutf-8%27%27aaabbcc.jpg&response-content-type=application%2Foctet-stream&OSSAccessKeyId=xAme5tplBBYJXFYm&Expires=1513664434&Signature=tC3Ai31a48b1dbUSkZVDtN1Eo%2F4%3D').then(data => {
+  //   fs.writeFileSync('/Users/perry/DeskTop/testingDown.jpg', data)
   // })
 
-  // await sendRequest({
-  //   urlPath: '/api/lawyers',
-  //   method: 'post',
-  //   multipart: true,
-  //   params: {
-  //     // filefield: 'files',
-  //     // files: fs.createReadStream('/Users/perry/Desktop/test.xlsx'),
-  //
-  //     applicant_institution: 'applicant_institution',
-  //     name: 'name',
-  //     address: 'address',
-  //     post_code: 'post_code',
-  //     firm_contact_number: 'firm_contact_number',
-  //     website: 'website',
-  //     fax: 'fax',
-  //     established_at: Number(new Date()),
-  //     registered_capital: 12131313,
-  //     legal_person: 'legal_person',
-  //     legal_person_contact_number: 'legal_person_contact_number',
-  //     legal_person_email: 'legal_person_email',
-  //     // business_line: 'business_line',
-  //     been_arbitrator_situation: 'been_arbitrator_situation',
-  //     industry_awards: 'industry_awards',
-  //     sub_firm_amount_city: 'sub_firm_amount_city',
-  //     is_annual_survey_qualified: 1,
-  //     has_serverd_crc_company: 'has_serverd_crc_company',
-  //     lawyer_name: 'lawyer_name',
-  //     lawyer_busi_license_number: 'lawyer_busi_license_number',
-  //     // lawyer_skilful_business_line: 'lawyer_skilful_business_line',
-  //     lawyer_contact_number: 'lawyer_contact_number',
-  //     lawyer_punish: 'lawyer_punish',
-  //     remark: 'remark',
-  //     lawfirm_punish: JSON.stringify([
-  //       {
-  //         title: '惩罚1概述',
-  //         body: '惩罚1详细描述'
-  //       }
-  //     ])
-  //   }
-  // })
+  // console.log('after download')
 
   // disconnect client after set static data.
   client.disconnect()

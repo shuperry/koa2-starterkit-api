@@ -22,6 +22,18 @@ export default {
       }
     }
   },
+  split_single_conf_file: {
+    watch_envs: [
+      'local',
+      'production'
+    ],
+    enable_hot_restart: true,
+    conf_file_name: 'test-nconf.js',
+    pm2_app_names: [
+      'recipe-api-cluster',
+      'life-assistant-add-weixin-news-msg-service'
+    ]
+  },
   mail: {
     sender: {
       service: 'qq',

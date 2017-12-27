@@ -3,7 +3,6 @@
 import path from 'path'
 
 import _ from 'lodash'
-import merge from 'lodash.merge'
 import fs from 'fs-plus'
 import jwt from 'jsonwebtoken'
 import Router from 'koa-router'
@@ -37,13 +36,12 @@ export default (app) => {
         'PUT',
         'PATCH'
       ], ctx.request.method)) {
-      let params = merge({}, ctx.request.body, ctx.req.body, ctx.params, ctx.query)
+      let params = _.extend({}, ctx.request.body, ctx.req.body)
 
       logger.info('begin visiting url at', beginVisitTime.format('YYYY-MM-DD HH:mm:ss SSS'), ' =>', '[',
         ctx.request.method, ']', url, 'with data =>', params, '\n header.authorization =>', ctx.header.authorization)
     }
 
-    ctx.type = 'json'
     await next()
   })
 
@@ -197,6 +195,8 @@ export default (app) => {
   app.use(router.allowedMethods())
 
   app.use(async (ctx, next) => {
+    ctx.type = ctx.type || 'json'
+
     const url = ctx.url
     finishVisitTime = moment(moment(), 'YYYY-MM-DD HH:mm:ss SSS')
 

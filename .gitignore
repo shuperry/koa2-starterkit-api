@@ -11,3 +11,4 @@ logs
 .DS_Store
 npm-debug.*
 .idea
+test-nconf.js

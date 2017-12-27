@@ -1,3 +1,5 @@
+import hotRestart from '../server/hot-restart'
+
 export default {
   name: 'starterkit-api',
   port: 10120,
