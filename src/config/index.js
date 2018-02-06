@@ -15,7 +15,7 @@ const globalConf = {
 const defaultConf = require(path.join(__dirname, 'default')).default
 const envConf = require(path.join(__dirname, `${environment}`)).default
 
-const splitConfFileName = envConf['split_single_conf_file']['conf_file_name'] || defaultConf['split_single_conf_file']['conf_file_name']
+const splitConfFileName = (envConf['split_single_conf_file'] && envConf['split_single_conf_file']['conf_file_name']) ? envConf['split_single_conf_file']['conf_file_name'] : defaultConf['split_single_conf_file']['conf_file_name']
 const splitConf = require(path.join(appPath, splitConfFileName)).default
 
 nconf
