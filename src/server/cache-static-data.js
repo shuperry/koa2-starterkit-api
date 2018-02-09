@@ -82,8 +82,8 @@ const testSth = async (client) => {
 
 const sendRequest = async ({urlPath, method = 'get', params = {}, multipart = false, headers, queryString}) => {
   const protocol = 'http'
-  const apiHost = '10.59.6.223'
-  const apiPort = '7002'
+  const apiHost = 'localhost'
+  const apiPort = '7443'
 
   let res
 
@@ -172,6 +172,18 @@ export default async () => {
 
   // create new redis client.
   const client = await createRedisClient()
+
+  // await sendRequest({
+  //   urlPath: '/api/outside-lawyer/bids-documents/18/addtional-defecations',
+  //   method: 'post',
+  //   multipart: true,
+  //   params: {
+  //     filefield: 'files',
+  //     files: fs.createReadStream('/Users/perry/Desktop/test.xlsx'),
+  //     title: '测试标题',
+  //     body: '测试内容'
+  //   }
+  // })
 
   // await testRedis(client)
 
